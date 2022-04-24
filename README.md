@@ -93,7 +93,21 @@ After getting the datasets ([BP4D](http://www.cs.binghamton.edu/~lijun/Research/
         ├── DISFA_calculate_AU_class_weights.py
         ├── BP4D_deal_AU_relation.py
         ├── DISFA_deal_AU_relation.py
-        
+
+Before testing or training on BP4D, run:
+```
+python BP4D_image_label_proccess.py
+python BP4D_calculate_AU_class_weights.py
+python BP4D_deal_AU_relation.py
+```
+
+Before testing or training on DISFA, run:
+```
+python DISFA_image_label_proccess.py
+python DISFA_calculate_AU_class_weights.py
+python DISFA_deal_AU_relation.py
+```
+
 `BP4D_image_label_proccess.py` and `DISFA_image_label_proccess.py` are two files to get `img_path_fold*.txt` and `label_fold*.txt` from source data files.
 For example,
 - to get `BP4D_train/test_img_path_fold*.txt` and `BP4D_train/test_label_fold*.txt`, run:
