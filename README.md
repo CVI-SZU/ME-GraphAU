@@ -93,25 +93,24 @@ you can use our data processing tools in  `tool/`.
         ├── DISFA_calculate_AU_class_weights.py
         ├── BP4D_deal_AU_relation.py
         ├── DISFA_deal_AU_relation.py
-        ```
         
-`BP4D_image_label_proccess.py` and `DISFA_image_label_proccess.py` are two files to get 'img_path_fold*.txt' and 'label_fold*.txt' from source data files.
+`BP4D_image_label_proccess.py` and `DISFA_image_label_proccess.py` are two files to get `img_path_fold*.txt` and `label_fold*.txt` from source data files.
 For example,
 - to get 'BP4D_train/test_img_path_fold*.txt' and 'BP4D_train/test_label_fold*.txt', run:
 ```
 python BP4D_image_label_proccess.py
 ```
 
-`BP4D_calculate_AU_class_weights.py` and `DISFA_calculate_AU_class_weights.py` are two files to get 'weight_fold*.txt' froms 'label_fold*.txt'.
+`BP4D_calculate_AU_class_weights.py` and `DISFA_calculate_AU_class_weights.py` are two files to get `weight_fold*.txt` from `label_fold*.txt`.
 For example,
 - to get 'DISFA_train_AU_relation_fold*.txt', run:
 ```
 BP4D_calculate_AU_class_weights.py
 ```
 
-`BP4D_deal_AU_relation.py` and `DISFA_deal_AU_relation.py` are two files to get 'train_AU_relation_fold*.txt' froms 'label_fold*.txt'.
+`BP4D_deal_AU_relation.py` and `DISFA_deal_AU_relation.py` are two files to get `train_AU_relation_fold*.txt` from `label_fold*.txt`.
 For example,
-- to get 'BP4D_weight_fold*.txt', run:
+- to get `DISFA_train_AU_relation_fold*.txt`, run:
 ```
 DISFA_deal_AU_relation.py
 ```
