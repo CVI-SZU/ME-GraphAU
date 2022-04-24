@@ -105,14 +105,14 @@ python BP4D_image_label_proccess.py
 For example,
 - to get `BP4D_weight_fold*.txt`, run:
 ```
-BP4D_calculate_AU_class_weights.py
+python BP4D_calculate_AU_class_weights.py
 ```
 
 `BP4D_deal_AU_relation.py` and `DISFA_deal_AU_relation.py` are two files to get `train_AU_relation_fold*.txt` from `label_fold*.txt`.
 For example,
 - to get `DISFA_train_AU_relation_fold*.txt`, run:
 ```
-DISFA_deal_AU_relation.py
+python DISFA_deal_AU_relation.py
 ```
 
 **Training with ImageNet pre-trained models**
