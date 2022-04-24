@@ -83,7 +83,7 @@ Data
 
 **Tools for prepareing data**
 
-After getting the datasets (([BP4D](http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html) and [DISFA](http://mohammadmahoor.com/disfa-contact-form/)))
+After getting the datasets ([BP4D](http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html) and [DISFA](http://mohammadmahoor.com/disfa-contact-form/))
 , you can use our data processing tools in  `tool/`.
 
         tool/
