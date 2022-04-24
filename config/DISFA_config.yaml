@@ -1,0 +1,3 @@
+dataset_path: 'data/DISFA'
+num_classes: 8
+neighbor_num: 3

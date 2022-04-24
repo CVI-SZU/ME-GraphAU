@@ -1,0 +1,3 @@
+dataset_path: 'data/BP4D'
+num_classes: 12
+neighbor_num: 4
