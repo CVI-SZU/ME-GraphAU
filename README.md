@@ -103,7 +103,7 @@ python BP4D_image_label_proccess.py
 
 `BP4D_calculate_AU_class_weights.py` and `DISFA_calculate_AU_class_weights.py` are two files to get `weight_fold*.txt` from `label_fold*.txt`.
 For example,
-- to get `DISFA_train_AU_relation_fold*.txt`, run:
+- to get `BP4D_weight_fold*.txt`, run:
 ```
 BP4D_calculate_AU_class_weights.py
 ```
