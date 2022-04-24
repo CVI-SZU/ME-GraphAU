@@ -5,3 +5,4 @@ numpy
 tqdm
 timm
 easydict
+pyyaml == 5.4.1
