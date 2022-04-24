@@ -96,6 +96,7 @@ After getting the datasets ([BP4D](http://www.cs.binghamton.edu/~lijun/Research/
 
 Before testing or training on BP4D, run:
 ```
+cd tool/
 python BP4D_image_label_proccess.py
 python BP4D_calculate_AU_class_weights.py
 python BP4D_deal_AU_relation.py
@@ -103,6 +104,7 @@ python BP4D_deal_AU_relation.py
 
 Before testing or training on DISFA, run:
 ```
+cd tool/
 python DISFA_image_label_proccess.py
 python DISFA_calculate_AU_class_weights.py
 python DISFA_deal_AU_relation.py
