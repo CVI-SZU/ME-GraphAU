@@ -166,6 +166,21 @@ python train_stage2.py --dataset DISFA --arc swin_transformer_base --exp-name sw
 python test.py --dataset DISFA --arc swin_transformer_base --exp-name test_fold2  --resume results/swin_transformer_base_second_stage/bs_64_seed_0_lr_0.000001/cur_model_fold2.pth --fold 2
 ```
 
+
+### Pretrained models
+
+BP4D
+|arch_type|download link|
+| :--- | :---: |
+|`MEFARG- Swin-B`|[link](https://drive.google.com/drive/folders/1RRmXyEY9Z8-YMy81h_mPCTUigtLfizx9?usp=sharing)|
+|`MEFARG- ResNet-50`| - |
+
+DISFSA
+|arch_type|download link|
+| :--- | :---: |
+|`MEFARG- Swin-B`| - |
+|`MEFARG- ResNet-50`| - |
+
 Main Results
 =
 **BP4D**
