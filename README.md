@@ -172,14 +172,14 @@ python test.py --dataset DISFA --arc swin_transformer_base --exp-name test_fold2
 BP4D
 |arch_type|download link|
 | :--- | :---: |
-|`MEFARG (Swin-B)`|[link](https://drive.google.com/drive/folders/1RRmXyEY9Z8-YMy81h_mPCTUigtLfizx9?usp=sharing)|
-|`MEFARG (ResNet-50)`| - |
+|`MEFARG (ResNet-50)`| [link](https://drive.google.com/file/d/1gYVHRjIj6ounxtTdXMje4WNHFMfCTVF9/view?usp=sharing) |
+|`MEFARG (Swin-B)`|[link](https://drive.google.com/file/d/1Ti0auMA5o94toJfszuHoMlSlWUumm9L8/view?usp=sharing)|
 
 DISFA
 |arch_type|download link|
 | :--- | :---: |
-|`MEFARG (Swin-B)`| - |
 |`MEFARG (ResNet-50)`| - |
+|`MEFARG (Swin-B)`| - |
 
 Main Results
 =
