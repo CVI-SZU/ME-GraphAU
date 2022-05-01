@@ -49,7 +49,7 @@ def main(conf):
 
     # data
     val_loader, val_data_num = get_dataloader(conf)
-    logging.info("Fold: [{} | {}  val_data_num: {} ]".format(conf.fold + 1, conf.N_fold, val_data_num))
+    logging.info("Fold: [{} | {}  val_data_num: {} ]".format(conf.fold, conf.N_fold, val_data_num))
     net = MEFARG(num_classes=conf.num_classes, backbone=conf.arc)
 
     # resume
