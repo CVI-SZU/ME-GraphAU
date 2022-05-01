@@ -179,7 +179,7 @@ DISFA
 |arch_type|download link|
 | :--- | :---: |
 |`MEFARG (ResNet-50)`| - |
-|`MEFARG (Swin-B)`| - |
+|`MEFARG (Swin-B)`| [link](https://drive.google.com/file/d/1T44KPDaUhi4J_C-fWa6RxXNkY3yoDwIi/view?usp=sharing) |
 
 Main Results
 =
