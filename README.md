@@ -19,8 +19,8 @@ Our approach first encodes each AU\'s activation status and its association with
 
 News
 =
- The Paper will be appeared on arixv tomorrow (3/5/2022).
- The Paper was accepted by IJCAI-ECAI 2022 (21/4/2022).
+- The Paper will be appeared on arixv tomorrow (3/5/2022).
+- The Paper was accepted by IJCAI-ECAI 2022 (21/4/2022).
  
  
 Requirements
