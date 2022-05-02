@@ -170,16 +170,18 @@ python test.py --dataset DISFA --arc swin_transformer_base --exp-name test_fold2
 ### Pretrained models
 
 BP4D
-|arch_type|download link|
+|arch_type|GoogleDrive link|
 | :--- | :---: |
 |`MEFARG (ResNet-50)`| [link](https://drive.google.com/file/d/1gYVHRjIj6ounxtTdXMje4WNHFMfCTVF9/view?usp=sharing) |
 |`MEFARG (Swin-B)`|[link](https://drive.google.com/file/d/1Ti0auMA5o94toJfszuHoMlSlWUumm9L8/view?usp=sharing)|
 
 DISFA
-|arch_type|download link|
+|arch_type|GoogleDrive link|
 | :--- | :---: |
-|`MEFARG (ResNet-50)`| - |
+|`MEFARG (ResNet-50)`| [link](https://drive.google.com/file/d/1V-imbmhg-OgcP2d9SETT5iswNtCA0f8_/view?usp=sharing) |
 |`MEFARG (Swin-B)`| [link](https://drive.google.com/file/d/1T44KPDaUhi4J_C-fWa6RxXNkY3yoDwIi/view?usp=sharing) |
+
+Download these files (e.g. ```ME-GraphAU_swin_base_BP4D.zip```) and unzip them, each of which involves the checkpoints of three folds.
 
 Main Results
 =
