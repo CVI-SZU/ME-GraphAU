@@ -36,7 +36,7 @@ The Datasets we used:
 
 We provide tools for prepareing data in ```tool/```.
 After Downloading raw data files, you can use these tools to process them, aligning with our protocals.
-More details has described in [tool/Readme.md](tool/README.md).
+More details has described in [tool/README.md](tool/README.md).
 
 
 **Training with ImageNet pre-trained models**
