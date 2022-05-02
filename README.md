@@ -34,9 +34,9 @@ The Datasets we used:
   * [BP4D](http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html)
   * [DISFA](http://mohammadmahoor.com/disfa-contact-form/)
 
-We provide tools for prepareing data in ```tool/```
+We provide tools for prepareing data in ```tool/```.
 After Downloading raw data files, you can use these tools to process them, aligning with our protocals.
-More details described in [tool/Readme.md](tool/Readme.md)
+More details has described in [tool/Readme.md](tool/Readme.md).
 
 
 **Training with ImageNet pre-trained models**
