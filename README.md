@@ -15,12 +15,6 @@ Our approach first encodes each AU\'s activation status and its association with
 </p>
 
 >The main novelty of the proposed approach in comparison to pre-defined AU graphs and deep learned facial display-specific graphs are illustrated in this figure.
-
-
-News
-=
-- The Paper will be appeared on arixv tomorrow (3/5/2022).
-- The Paper was accepted by IJCAI-ECAI 2022 (21/4/2022).
  
  
 Requirements
