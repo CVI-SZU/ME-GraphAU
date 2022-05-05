@@ -134,16 +134,16 @@ Citation
 if the code or method help you in the research, please cite the following paper:
 ```
 @article{luo2022learning,
-	title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
-	author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
-	journal={arXiv preprint arXiv:2205.01782},
-	year={2022}
+title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
+author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
+journal={arXiv preprint arXiv:2205.01782},
+year={2022}
 }
 
 @inproceedings{luo2022learning,
- title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
-	author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
- booktitle={Proceedings of the International Conference on Artificial Intelligence (IJCAI)},
- year={2022}
+title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
+author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
+booktitle={Proceedings of the International Conference on Artificial Intelligence (IJCAI)},
+year={2022}
 }
 ```
