@@ -126,3 +126,24 @@ Main Results
 |   HMP-PS | 38.0 |45.9 |65.2 |50.9 |50.8 |76.0 |93.3 |67.6 |61.0|
 |   Ours (ResNet-50) | 54.6 |47.1 |72.9 |54.0 |55.7 |76.7 |91.1 |53.0 |63.1|
 |   Ours (Swin-B) | 52.5 |45.7 |76.1 |51.8 |46.5 |76.1 |92.9 |57.6 |62.4|
+
+
+
+Citation
+=
+if the code or method help you in the research, please cite the following paper:
+```
+@article{luo2022learning,
+	title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
+	author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
+	journal={arXiv preprint arXiv:2205.01782},
+	year={2022}
+}
+
+@inproceedings{luo2022learning,
+ title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
+	author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
+ booktitle={Proceedings of the International Conference on Artificial Intelligence (IJCAI)},
+ year={2022}
+}
+```
