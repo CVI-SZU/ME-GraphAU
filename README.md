@@ -5,7 +5,7 @@ This is an official release of the paper
 > **"Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition"**, 
 > **IJCAI-ECAI 2022**
 > 
-> [[Paper]](https://arxiv.org/abs/2205.01782)
+> [[Paper]](https://arxiv.org/abs/2205.01782) [[Project]](https://www.chengluo.cc/projects/ME-AU/)
 > 
 > __Abstract:__ This work proposes an AU relationship modelling approach that deep learns a unique graph to explicitly describe the relationship between each pair of AUs of the target facial display.
 Our approach first encodes each AU\'s activation status and its association with other AUs into a node feature. Then, it learns a pair of multi-dimensional edge features to describe multiple task-specific relationship cues between each pair of AUs.
