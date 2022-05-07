@@ -80,16 +80,24 @@ python test.py --dataset DISFA --arc swin_transformer_base --exp-name test_fold2
 ### Pretrained models
 
 BP4D
-|arch_type|GoogleDrive link|
-| :--- | :---: |
-|`MEFARG (ResNet-50)`| [link](https://drive.google.com/file/d/1gYVHRjIj6ounxtTdXMje4WNHFMfCTVF9/view?usp=sharing) |
-|`MEFARG (Swin-B)`|[link](https://drive.google.com/file/d/1Ti0auMA5o94toJfszuHoMlSlWUumm9L8/view?usp=sharing)|
+|arch_type|GoogleDrive link| Average F1-score|
+| :--- | :---: |  :---: |
+|`Ours (ResNet-18)`| -| - |
+|`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/1gYVHRjIj6ounxtTdXMje4WNHFMfCTVF9/view?usp=sharing) | 64.7 |
+|`Ours (ResNet-101)`| -| 64.8 |
+|`Ours (Swin-Tiny)`| -| 65.6 |
+|`Ours (Swin-Small)`| -| 65.1 |
+|`Ours (Swin-Base)`|[link](https://drive.google.com/file/d/1Ti0auMA5o94toJfszuHoMlSlWUumm9L8/view?usp=sharing)| 65.5 |
 
 DISFA
-|arch_type|GoogleDrive link|
-| :--- | :---: |
-|`MEFARG (ResNet-50)`| [link](https://drive.google.com/file/d/1V-imbmhg-OgcP2d9SETT5iswNtCA0f8_/view?usp=sharing) |
-|`MEFARG (Swin-B)`| [link](https://drive.google.com/file/d/1T44KPDaUhi4J_C-fWa6RxXNkY3yoDwIi/view?usp=sharing) |
+|arch_type|GoogleDrive link| Average F1-score|
+| :--- | :---: |  :---: |
+|`Ours (ResNet-18)`| -| - |
+|`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/1V-imbmhg-OgcP2d9SETT5iswNtCA0f8_/view?usp=sharing) | 63.1 |
+|`Ours (ResNet-101)`| -| - |
+|`Ours (Swin-Tiny)`| -| - |
+|`Ours (Swin-Small)`| -| - |
+|`Ours (Swin-B)`| [link](https://drive.google.com/file/d/1T44KPDaUhi4J_C-fWa6RxXNkY3yoDwIi/view?usp=sharing) | 62.4 |
 
 Download these files (e.g. ```ME-GraphAU_swin_base_BP4D.zip```) and unzip them, each of which involves the checkpoints of three folds.
 
