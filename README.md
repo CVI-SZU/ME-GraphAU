@@ -85,7 +85,7 @@ BP4D
 |`Ours (ResNet-18)`| -| - |
 |`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/1gYVHRjIj6ounxtTdXMje4WNHFMfCTVF9/view?usp=sharing) | 64.7 |
 |`Ours (ResNet-101)`| -| 64.8 |
-|`Ours (Swin-Tiny)`| -| 65.6 |
+|`Ours (Swin-Tiny)`| [link](https://drive.google.com/file/d/1BT4n7_5Wr6bGxHWVf3WrT7uBT0Zg9B5c/view?usp=sharing)| 65.6 |
 |`Ours (Swin-Small)`| -| 65.1 |
 |`Ours (Swin-Base)`|[link](https://drive.google.com/file/d/1Ti0auMA5o94toJfszuHoMlSlWUumm9L8/view?usp=sharing)| 65.5 |
 
