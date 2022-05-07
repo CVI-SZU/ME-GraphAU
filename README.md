@@ -97,7 +97,7 @@ DISFA
 |`Ours (ResNet-101)`| -| - |
 |`Ours (Swin-Tiny)`| -| - |
 |`Ours (Swin-Small)`| -| - |
-|`Ours (Swin-B)`| [link](https://drive.google.com/file/d/1T44KPDaUhi4J_C-fWa6RxXNkY3yoDwIi/view?usp=sharing) | 62.4 |
+|`Ours (Swin-Base)`| [link](https://drive.google.com/file/d/1T44KPDaUhi4J_C-fWa6RxXNkY3yoDwIi/view?usp=sharing) | 62.4 |
 
 Download these files (e.g. ```ME-GraphAU_swin_base_BP4D.zip```) and unzip them, each of which involves the checkpoints of three folds.
 
