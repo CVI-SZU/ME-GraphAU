@@ -18,8 +18,8 @@ This is an official release of the paper
 
 >The main novelty of the proposed approach in comparison to pre-defined AU graphs and deep learned facial display-specific graphs are illustrated in this figure.
 
-[![Watch the video](https://www.chengluo.cc/projects/ME-AU/images/demo.mp4)](https://www.chengluo.cc/projects/ME-AU/images/demo.mp4)
 
+img/demo.mp4
 
 Requirements
 =
