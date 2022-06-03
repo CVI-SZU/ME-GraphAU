@@ -57,7 +57,7 @@ After getting the datasets ([BP4D](http://www.cs.binghamton.edu/~lijun/Research/
 , you can use our data processing tools in  `tool/`.
 
         tool/
-        ├── BP4D_image_label_proccess.py
+        ├── BP4D_image_label_process.py
         ├── DISFA_image_label_process.py
         ├── BP4D_calculate_AU_class_weights.py
         ├── DISFA_calculate_AU_class_weights.py
@@ -67,7 +67,7 @@ After getting the datasets ([BP4D](http://www.cs.binghamton.edu/~lijun/Research/
 Before testing or training on BP4D, run:
 ```
 cd tool/
-python BP4D_image_label_proccess.py
+python BP4D_image_label_process.py
 python BP4D_calculate_AU_class_weights.py
 python BP4D_deal_AU_relation.py
 ```
@@ -75,16 +75,16 @@ python BP4D_deal_AU_relation.py
 Before testing or training on DISFA, run:
 ```
 cd tool/
-python DISFA_image_label_proccess.py
+python DISFA_image_label_process.py
 python DISFA_calculate_AU_class_weights.py
 python DISFA_deal_AU_relation.py
 ```
 
-`BP4D_image_label_proccess.py` and `DISFA_image_label_proccess.py` are two files to get `img_path_fold*.txt` and `label_fold*.txt` from source data files.
+`BP4D_image_label_process.py` and `DISFA_image_label_process.py` are two files to get `img_path_fold*.txt` and `label_fold*.txt` from source data files.
 For example,
 - to get `BP4D_train/test_img_path_fold*.txt` and `BP4D_train/test_label_fold*.txt`, run:
 ```
-python BP4D_image_label_proccess.py
+python BP4D_image_label_process.py
 ```
 
 `BP4D_calculate_AU_class_weights.py` and `DISFA_calculate_AU_class_weights.py` are two files to get `weight_fold*.txt` from `label_fold*.txt`.
