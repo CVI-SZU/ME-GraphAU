@@ -1,3 +1,7 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/learning-multi-dimensional-edge-feature-based/facial-action-unit-detection-on-bp4d)](https://paperswithcode.com/sota/facial-action-unit-detection-on-bp4d?p=learning-multi-dimensional-edge-feature-based)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/learning-multi-dimensional-edge-feature-based/facial-action-unit-detection-on-disfa)](https://paperswithcode.com/sota/facial-action-unit-detection-on-disfa?p=learning-multi-dimensional-edge-feature-based)
+
+
 Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition
 =
 This is an official release of the paper  
@@ -22,7 +26,7 @@ This is an official release of the paper
 https://user-images.githubusercontent.com/35754447/169745317-40f76ec9-4bfd-4206-8f1e-4ab4a9bf464d.mp4
 
 
-Requirements
+🔧 Requirements
 =
 - Python 3
 - PyTorch
@@ -104,7 +108,8 @@ DISFA
 
 Download these files (e.g. ```ME-GraphAU_swin_base_BP4D.zip```) and unzip them, each of which involves the checkpoints of three folds.
 
-Main Results
+
+📝 Main Results
 =
 **BP4D**
 
@@ -140,7 +145,7 @@ Main Results
 
 
 
-Citation
+🎓 Citation
 =
 if the code or method help you in the research, please cite the following paper:
 ```
@@ -151,10 +156,14 @@ journal={arXiv preprint arXiv:2205.01782},
 year={2022}
 }
 
+
 @inproceedings{luo2022learning,
-title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
-author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
-booktitle={Proceedings of the International Conference on Artificial Intelligence (IJCAI)},
-year={2022}
+  title     = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
+  author    = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
+  booktitle = {Proceedings of the Thirty-First International Joint Conference on
+               Artificial Intelligence, {IJCAI-22}},
+  pages     = {1239--1246},
+  year      = {2022}
 }
+
 ```
