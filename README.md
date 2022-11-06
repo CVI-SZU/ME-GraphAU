@@ -2,6 +2,10 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/learning-multi-dimensional-edge-feature-based/facial-action-unit-detection-on-disfa)](https://paperswithcode.com/sota/facial-action-unit-detection-on-disfa?p=learning-multi-dimensional-edge-feature-based)
 
 
+News
+=
+* We will provide an OpenAU version of our code and models trained on a large-scale hybrid dataset of over 2,000k images and 41 action unit categories. This tool if free to be used and relseased in 2 weeks.
+
 Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition
 =
 This is an official release of the paper  
@@ -11,10 +15,6 @@ This is an official release of the paper
 > 
 > [[Paper]](https://arxiv.org/abs/2205.01782) [[Project]](https://www.chengluo.cc/projects/ME-AU/)
 > 
-
-📝 News
-=
-* We will provide an OpenAU version of our code and models trained on a large-scale hybrid dataset of over 2,000k images and 41 action unit categories. This tool if free to be used and relseased in 2 weeks.
 
 <p align="center">
 <img src="img/intro.png" width="70%" />
