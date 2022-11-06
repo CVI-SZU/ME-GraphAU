@@ -11,10 +11,10 @@ This is an official release of the paper
 > 
 > [[Paper]](https://arxiv.org/abs/2205.01782) [[Project]](https://www.chengluo.cc/projects/ME-AU/)
 > 
-> __Abstract:__ The activations of Facial Action Units (AUs) mutually influence one another. While the relationship between a pair of AUs can be complex and unique, existing approaches fail to specifically and explicitly represent such cues for each pair of AUs in each facial display. This paper proposes an AU relationship modelling approach that deep learns a unique graph to explicitly describe the relationship between each pair of AUs of the target facial display. Our approach first encodes each AU's activation status and its association with other AUs into a node feature. Then, it learns a pair of multi-dimensional edge features to describe multiple task-specific relationship cues between each pair of AUs. During both node and edge feature learning, our approach also considers the influence of the unique facial display on AUs' relationship by taking the full face representation as an input. Experimental results on BP4D and DISFA datasets show that both node and edge feature learning modules provide large performance improvements for CNN and transformer-based backbones, with our best systems achieving the state-of-the-art AU recognition results. Our approach not only has a strong capability in modelling relationship cues for AU recognition but also can be easily incorporated into various backbones.
 
-> - it encodes both the activation status of the AU and its association with other AUs into each node feature
-> -  it learns a multi-dimensional edge feature to explicitly capture the task-specific relation
+📝 News
+=
+* We will provide an OpenAU version of our code and models trained on a large-scale hybrid dataset of over 2,000k images and 41 action unit categories. This tool if free to be used and relseased in 2 weeks.
 
 <p align="center">
 <img src="img/intro.png" width="70%" />
