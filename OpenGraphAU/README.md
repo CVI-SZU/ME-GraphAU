@@ -6,6 +6,9 @@ This repo is the OpenGprahAU tool.
 
 | AU1 | AU2 | AU4 | AU5 | AU6 | AU7 | AU9 |   AU10 | AU11  | AU12 | AU13 | AU14 | AU15 | AU16 | 
 | :---:  | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Inner brow raiser| Outer brow raiser
+![image](https://user-images.githubusercontent.com/35754447/201079730-c175a5ee-3d8b-440d-80b1-491c1abdf74a.png)
+ | AU19 | AU20  | AU22 | AU23 | AU24 | AU25 | AU26 | AU27 | AU32 | AU38 | AU39 | - |
 | AU17 | AU18 | AU19 | AU20  | AU22 | AU23 | AU24 | AU25 | AU26 | AU27 | AU32 | AU38 | AU39 | - |
 | :---:  | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 
