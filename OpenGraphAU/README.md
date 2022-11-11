@@ -1,13 +1,25 @@
 # OpenGrpahAU
 
 
-
 This repo is the OpenGprahAU tool.
 
+demo:
+<p align="center">
+<img src="demo_imgs/1014_pred.jpg" width="70%" />
+</p>
+
+Models were traiend on hybrid dataset of 2,000k images.
+
+This hybrid dataset includes:
+ * [BP4D](http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html)
+ * [DISFA](http://mohammadmahoor.com/disfa-contact-form/)
+ * [RAF-AU](http://www.whdeng.cn/RAF/model3.html)
+ * [AFF-Wild 2](https://ibug.doc.ic.ac.uk/resources/aff-wild2/)
+ * [CK+](http://www.jeffcohn.net/Resources/)
+ * [CASME II](http://casme.psych.ac.cn/casme/e2)
 
 
-
-41 action unit categories, 
+The tool can predict action units of 41 categories:
 
 | AU1 | AU2 | AU4 | AU5 | AU6 | AU7 | AU9 |   AU10 | AU11  | AU12 | AU13 | AU14 | AU15 | AU16 | 
 | :-----:  | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
@@ -20,20 +32,6 @@ This repo is the OpenGprahAU tool.
 | AUL1 | AUL1 | AUL2 | AUR2 | AUL4 | AUR4 | AUL6 |   AUR6 | AUL10  | AUR10 | AUL12 | AUR12 | AUL14 | AUR14 | 
 | :-----:  | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
 | Left inner brow raiser | Right inner brow raiser | Left outer brow raiser | Right outer brow raiser| Left brow lowerer | Right brow lowerer | Left cheek raiser | Right cheek raiser | Left upper lip raiser | Right upper lip raiser | Left nasolabial deepener | Right nasolabial deepener | Left dimpler | Right dimpler |
-
-traiend on hybrid dataset of 2,000k images.
-This hybrid dataset include:
- * [BP4D](http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html)
- * [DISFA](http://mohammadmahoor.com/disfa-contact-form/)
- * [RAF-AU](http://www.whdeng.cn/RAF/model3.html)
- * [AFF-Wild 2](https://ibug.doc.ic.ac.uk/resources/aff-wild2/)
- * [CK+](http://www.jeffcohn.net/Resources/)
- * [CASME II](http://casme.psych.ac.cn/casme/e2)
-
-demo:
-<p align="center">
-<img src="demo_imgs/1014_pred.jpg" width="70%" />
-</p>
 
 
 ## Pretrained models
