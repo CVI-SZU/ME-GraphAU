@@ -22,6 +22,13 @@ This repo is the OpenGprahAU tool.
 | Left inner brow raiser | Right inner brow raiser | Left outer brow raiser | Right outer brow raiser| Left brow lowerer | Right brow lowerer | Left cheek raiser | Right cheek raiser | Left upper lip raiser | Right upper lip raiser | Left nasolabial deepener | Right nasolabial deepener | Left dimpler | Right dimpler |
 
 traiend on hybrid dataset of 2,000k images.
+This hybrid dataset include:
+ * [BP4D](http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html)
+ * [DISFA](http://mohammadmahoor.com/disfa-contact-form/)
+ * [RAF-AU](http://www.whdeng.cn/RAF/model3.html)
+ * [AFF-Wild 2](https://ibug.doc.ic.ac.uk/resources/aff-wild2/)
+ * [CK+](http://www.jeffcohn.net/Resources/)
+ * [CASME II](http://casme.psych.ac.cn/casme/e2)
 
 demo:
 <p align="center">
