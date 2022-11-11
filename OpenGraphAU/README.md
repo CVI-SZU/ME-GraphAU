@@ -45,7 +45,7 @@ Hybrid Dataset
 |`Ours (ResNet-18)`| -| - |  - |
 |`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/11xh9r2e4qCpWEtQ-ptJGWut_TQ0_AmSp/view?usp=share_link) | 22.52 |  92.63 |
 |`Ours (ResNet-101)`| - | -  |  -  |
-|`Ours (Swin-Tiny)`| - | 22.66 | 92.97 |
+|`Ours (Swin-Tiny)`| [link](https://drive.google.com/file/d/1-BuQmbxHbCtjamWi_orJyw-qqRRV5Z3A/view?usp=share_link) | 22.66 | 92.97 |
 |`Ours (Swin-Small)`| - | - | - |
 |`Ours (Swin-Base)`| - | - | - |
 
