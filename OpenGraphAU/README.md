@@ -34,6 +34,11 @@ The tool can predict action units of 41 categories:
 | Left inner brow raiser | Right inner brow raiser | Left outer brow raiser | Right outer brow raiser| Left brow lowerer | Right brow lowerer | Left cheek raiser | Right cheek raiser | Left upper lip raiser | Right upper lip raiser | Left nasolabial deepener | Right nasolabial deepener | Left dimpler | Right dimpler |
 
 
+
+We provide tools for prepareing data in ```tool/```.
+After Downloading raw data files, you can use these tools to process them, aligning with our protocals.
+We divide the dataset into three independent parts (i.e., train, val, test).
+
 ## Pretrained models
 
 Hybrid Dataset
