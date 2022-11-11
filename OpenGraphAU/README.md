@@ -71,18 +71,18 @@ Hybrid Dataset
 ## Demo
 - to detect facial action units in an image, run:
 ```
-python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-resent50.pth --input demo_imgs/1014.jpg
+python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-ResNet50_first_stage.pth --input demo_imgs/1014.jpg
 ```
 
 ## Training and Testing
 
 - to train the first stage of our approach (ResNet-50) on hybrid Dataset, run:
 ```
-python train_stage1.py --arc resnet50 --exp-name OpenGprahAU-resent50_first_stage -b 512 -lr 0.00002  
+python train_stage1.py --arc resnet50 --exp-name OpenGprahAUrResNet50_first_stage -b 512 -lr 0.00002  
 ```
 
 
 - to test the first stage of our approach (ResNet-50) on hybrid Dataset, run:
 ```
-python test.py --arc resnet50 --exp-name test_OpenGprahAU-resent50_first_stage  --resume checkpoints/OpenGprahAU-resent50.pth
+python test.py --arc resnet50 --exp-name test_OpenGprahAU-ResNet50_first_stage  --resume checkpoints/OpenGprahAU-ResNet50_first_stage.pth
 ```
