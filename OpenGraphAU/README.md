@@ -40,26 +40,26 @@ Hybrid Dataset
 
 ### Stage1:
 
-|arch_type|GoogleDrive link| Average F1-score|
-| :--- | :---: |  :---: |
-|`Ours (ResNet-18)`| -| - |
-|`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/11xh9r2e4qCpWEtQ-ptJGWut_TQ0_AmSp/view?usp=share_link) | - |
-|`Ours (ResNet-101)`| - | -  |
-|`Ours (Swin-Tiny)`| - | - |
-|`Ours (Swin-Small)`| - | - |
-|`Ours (Swin-Base)`| - | - |
+|arch_type|GoogleDrive link| Average F1-score| Average Acc.|
+| :--- | :---: |  :---: |  :---: | 
+|`Ours (ResNet-18)`| -| - |  - |
+|`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/11xh9r2e4qCpWEtQ-ptJGWut_TQ0_AmSp/view?usp=share_link) | 22.52 |  92.63 |
+|`Ours (ResNet-101)`| - | -  |  -  |
+|`Ours (Swin-Tiny)`| - | - | - |
+|`Ours (Swin-Small)`| - | - | - |
+|`Ours (Swin-Base)`| - | - | - |
 
 
 ### Stage2:
 
-|arch_type|GoogleDrive link| Average F1-score|
-| :--- | :---: |  :---: |
-|`Ours (ResNet-18)`| -| - |
-|`Ours (ResNet-50)`| - | - |
-|`Ours (ResNet-101)`| - | -  |
-|`Ours (Swin-Tiny)`| - | - |
-|`Ours (Swin-Small)`| - | - |
-|`Ours (Swin-Base)`| - | - |
+|arch_type|GoogleDrive link| Average F1-score| Average Acc.|
+| :--- | :---: |  :---: | :---: |
+|`Ours (ResNet-18)`| -| - | - |
+|`Ours (ResNet-50)`| - | - | - |
+|`Ours (ResNet-101)`| - | -  | - |
+|`Ours (Swin-Tiny)`| - | - | - |
+|`Ours (Swin-Small)`| - | - | - |
+|`Ours (Swin-Base)`| - | - | - |
 
 
 
@@ -67,4 +67,17 @@ Hybrid Dataset
 - to detect facial action units in an image, run:
 ```
 python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-resent50.pth --input demo_imgs/1014.jpg
+```
+
+## Training and Testing
+=
+- to train the first stage of our approach (ResNet-50) on hybrid Dataset, run:
+```
+python train_stage1.py --arc resnet50 --exp-name OpenGprahAU-resent50_first_stage -b 512 -lr 0.00002  
+```
+
+
+- to test the first stage of our approach (ResNet-50) on hybrid Dataset, run:
+```
+python test.py --arc resnet50 --exp-name test_OpenGprahAU-resent50_first_stage  --resume checkpoints/OpenGprahAU-resent50.pth
 ```
