@@ -2,7 +2,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/learning-multi-dimensional-edge-feature-based/facial-action-unit-detection-on-disfa)](https://paperswithcode.com/sota/facial-action-unit-detection-on-disfa?p=learning-multi-dimensional-edge-feature-based)
 
 
-News
+📢 News
 =
 * We will provide an [OpenGraphAU version](OpenGraphAU) of our code and models trained on a large-scale hybrid dataset of over 2,000k images and 41 action unit categories. This tool is free to be used and will be released in the next two weeks.
 
