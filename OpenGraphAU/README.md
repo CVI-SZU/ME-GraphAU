@@ -70,7 +70,7 @@ python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-r
 ```
 
 ## Training and Testing
-=
+
 - to train the first stage of our approach (ResNet-50) on hybrid Dataset, run:
 ```
 python train_stage1.py --arc resnet50 --exp-name OpenGprahAU-resent50_first_stage -b 512 -lr 0.00002  
