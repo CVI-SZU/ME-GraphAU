@@ -7,7 +7,7 @@ demo:
 <p align="center">
   <img src="demo_imgs/10025_pred.jpg" width="80%" />
   <img src="demo_imgs/10259_pred.jpg" width="80%" />
-
+  <img src="demo_imgs/828_pred.jpg" width="80%" />
 </p>
 
 Models were traiend on hybrid dataset of 2,000k images.
