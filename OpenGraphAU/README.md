@@ -6,8 +6,10 @@ This repo is the OpenGprahAU tool.
 demo:
 <p align="center">
   <img src="demo_imgs/10025_pred.jpg" width="80%" />
+  <img src="demo_imgs/25329_pred.jpg" width="80%" />
   <img src="demo_imgs/10259_pred.jpg" width="80%" />
   <img src="demo_imgs/828_pred.jpg" width="80%" />
+
 </p>
 
 Models were traiend on hybrid dataset of 2,000k images.
@@ -86,7 +88,7 @@ python train_stage1.py --arc resnet50 --exp-name OpenGprahAU-ResNet50_first_stag
 ```
 
 
-- to test the first stage of our approach (ResNet-50) on hybrid Dataset, run:
+- to test the first stage of our approach (SwinT) on hybrid Dataset, run:
 ```
-python test.py --arc resnet50 --exp-name test_OpenGprahAU-ResNet50_first_stage  --resume checkpoints/OpenGprahAU-ResNet50_first_stage.pth
+python test.py --arc swin_transformer_tiny --exp-name test_OpenGprahAU-ResNet50_first_stage  --resume checkpoints/OpenGprahAU-SwinT_first_stage.pth --draw_text
 ```
