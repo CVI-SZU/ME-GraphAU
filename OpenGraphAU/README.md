@@ -5,7 +5,6 @@ This repo is the OpenGprahAU tool.
 
 demo:
 <p align="center">
-<img src="demo_imgs/1014_pred.jpg" width="70%" />
 </p>
 
 Models were traiend on hybrid dataset of 2,000k images.
