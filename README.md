@@ -4,7 +4,7 @@
 
 📢 News
 =
-* We will provide an [OpenGraphAU version](OpenGraphAU) of our code and models trained on a large-scale hybrid dataset of over 2,000k images and 41 action unit categories. This tool is free to be used and will be released in the next two weeks.
+* 12/11/2022 We released an [OpenGraphAU](OpenGraphAU) or [OpenGraphAU](https://github.com/lingjivoo/OpenGraphAU) version of our code and models trained on a large-scale hybrid dataset of over 2,000k images and 41 action unit categories. 
 
 Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition
 =
