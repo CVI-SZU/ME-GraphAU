@@ -45,7 +45,7 @@ def main(conf):
     logging.info(infostr_probs)
 
     if conf.draw_text:
-        img = draw_text(conf.input, list(infostr_aus))
+        img = draw_text(conf.input, list(infostr_aus), pred)
         import cv2
         path = conf.input.split('.')[0]+'_pred.jpg'
         cv2.imwrite(path, img)
