@@ -52,7 +52,7 @@ Hybrid Dataset
 |arch_type|GoogleDrive link| Average F1-score| Average Acc.|
 | :--- | :---: |  :---: |  :---: | 
 |`Ours (MobileNetV3)`| -| - |  - |
-|`Ours (ResNet-18)`| - | 22.33 |  92.97 |
+|`Ours (ResNet-18)`| [link](https://drive.google.com/file/d/1b9yrKF663K9IwY2C2-1SD6azpAdNgBm7/view?usp=share_link) | 22.33 |  92.97 |
 |`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/11xh9r2e4qCpWEtQ-ptJGWut_TQ0_AmSp/view?usp=share_link) | 22.52 |  92.63 |
 |`Ours (Swin-Tiny)`| [link](https://drive.google.com/file/d/1JSa-ft965qXJlVGvnoMepbkRkSm78_to/view?usp=share_link) | 22.66 | 92.97 |
 |`Ours (Swin-Small)`| [link](https://drive.google.com/file/d/1GNjFKpd00nvgYIP2q7AzRSzfzEUfAqfT/view?usp=share_link) | 24.49 | 92.84 |
