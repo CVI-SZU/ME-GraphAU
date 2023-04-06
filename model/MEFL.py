@@ -1,14 +1,20 @@
+import math
+
+import numpy as np
 import torch
 import torch.nn as nn
-import numpy as np
 import torch.nn.functional as F
 from torch.autograd import Variable
-import math
-from .swin_transformer import swin_transformer_tiny, swin_transformer_small, swin_transformer_base
-from .resnet import resnet18, resnet50, resnet101
+
+from .basic_block import *
 from .graph import create_e_matrix
 from .graph_edge_model import GEM
-from .basic_block import *
+from .resnet import resnet18, resnet50, resnet101
+from .swin_transformer import (
+    swin_transformer_base,
+    swin_transformer_small,
+    swin_transformer_tiny,
+)
 
 
 # Gated GCN Used to Learn Multi-dimensional Edge Features and Node Features
@@ -45,7 +51,7 @@ class GNN(nn.Module):
         self.sigmoid = nn.Sigmoid()
         self.softmax = nn.Softmax(2)
         self.bnv1 = nn.BatchNorm1d(num_classes)
-        self.bne1 = nn.BatchNorm1d(num_classes*num_classes)
+        self.bne1 = nn.BatchNorm1d(num_classes * num_classes)
 
         self.bnv2 = nn.BatchNorm1d(num_classes)
         self.bne2 = nn.BatchNorm1d(num_classes * num_classes)
@@ -86,18 +92,20 @@ class GNN(nn.Module):
         Vix = self.A1(x)  # V x d_out
         Vjx = self.B1(x)  # V x d_out
         e = self.E1(edge)  # E x d_out
-        edge = edge + self.act(self.bne1(torch.einsum('ev, bvc -> bec', (end, Vix)) + torch.einsum('ev, bvc -> bec',(start, Vjx)) + e))  # E x d_out
+        edge = edge + self.act(
+            self.bne1(torch.einsum("ev, bvc -> bec", (end, Vix)) + torch.einsum("ev, bvc -> bec", (start, Vjx)) + e)
+        )  # E x d_out
 
         e = self.sigmoid(edge)
         b, _, c = e.shape
-        e = e.view(b,self.num_classes, self.num_classes, c)
+        e = e.view(b, self.num_classes, self.num_classes, c)
         e = self.softmax(e)
         e = e.view(b, -1, c)
 
         Ujx = self.V1(x)  # V x H_out
-        Ujx = torch.einsum('ev, bvc -> bec', (start, Ujx))  # E x H_out
+        Ujx = torch.einsum("ev, bvc -> bec", (start, Ujx))  # E x H_out
         Uix = self.U1(x)  # V x H_out
-        x = Uix + torch.einsum('ve, bec -> bvc', (end.t(), e * Ujx)) / self.num_classes  # V x H_out
+        x = Uix + torch.einsum("ve, bec -> bvc", (end.t(), e * Ujx)) / self.num_classes  # V x H_out
         x = self.act(res + self.bnv1(x))
         res = x
 
@@ -105,7 +113,9 @@ class GNN(nn.Module):
         Vix = self.A2(x)  # V x d_out
         Vjx = self.B2(x)  # V x d_out
         e = self.E2(edge)  # E x d_out
-        edge = edge + self.act(self.bne2(torch.einsum('ev, bvc -> bec', (end, Vix)) + torch.einsum('ev, bvc -> bec', (start, Vjx)) + e))  # E x d_out
+        edge = edge + self.act(
+            self.bne2(torch.einsum("ev, bvc -> bec", (end, Vix)) + torch.einsum("ev, bvc -> bec", (start, Vjx)) + e)
+        )  # E x d_out
 
         e = self.sigmoid(edge)
         b, _, c = e.shape
@@ -114,9 +124,9 @@ class GNN(nn.Module):
         e = e.view(b, -1, c)
 
         Ujx = self.V2(x)  # V x H_out
-        Ujx = torch.einsum('ev, bvc -> bec', (start, Ujx))  # E x H_out
+        Ujx = torch.einsum("ev, bvc -> bec", (start, Ujx))  # E x H_out
         Uix = self.U2(x)  # V x H_out
-        x = Uix + torch.einsum('ve, bec -> bvc', (end.t(), e * Ujx)) / self.num_classes  # V x H_out
+        x = Uix + torch.einsum("ve, bec -> bvc", (end.t(), e * Ujx)) / self.num_classes  # V x H_out
         x = self.act(res + self.bnv2(x))
         return x, edge
 
@@ -173,12 +183,12 @@ class Head(nn.Module):
 
 
 class MEFARG(nn.Module):
-    def __init__(self, num_classes=12, backbone='swin_transformer_base'):
+    def __init__(self, num_classes=12, backbone="swin_transformer_base"):
         super(MEFARG, self).__init__()
-        if 'transformer' in backbone:
-            if backbone == 'swin_transformer_tiny':
+        if "transformer" in backbone:
+            if backbone == "swin_transformer_tiny":
                 self.backbone = swin_transformer_tiny()
-            elif backbone == 'swin_transformer_small':
+            elif backbone == "swin_transformer_small":
                 self.backbone = swin_transformer_small()
             else:
                 self.backbone = swin_transformer_base()
@@ -186,10 +196,10 @@ class MEFARG(nn.Module):
             self.out_channels = self.in_channels // 2
             self.backbone.head = None
 
-        elif 'resnet' in backbone:
-            if backbone == 'resnet18':
+        elif "resnet" in backbone:
+            if backbone == "resnet18":
                 self.backbone = resnet18()
-            elif backbone == 'resnet101':
+            elif backbone == "resnet101":
                 self.backbone = resnet101()
             else:
                 self.backbone = resnet50()

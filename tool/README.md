@@ -14,7 +14,7 @@ Data and Data Prepareing Tool
         ├── data/BP4D/list/BP4D_test_label_fold3.txt
         ├── data/BP4D/list/BP4D_train_img_path_fold1.txt
         ├── data/BP4D/list/BP4D_train_img_path_fold2.txt
-        ├── data/BP4D/list/BP4D_train_img_path_fold3.txt     
+        ├── data/BP4D/list/BP4D_train_img_path_fold3.txt
         ├── data/BP4D/list/BP4D_train_label_fold1.txt
         ├── data/BP4D/list/BP4D_train_label_fold2.txt
         ├── data/BP4D/list/BP4D_train_label_fold3.txt
@@ -39,7 +39,7 @@ Data and Data Prepareing Tool
         ├── data/DISFA/list/DISFA_test_label_fold3.txt
         ├── data/DISFA/list/DISFA_train_img_path_fold1.txt
         ├── data/DISFA/list/DISFA_train_img_path_fold2.txt
-        ├── data/DISFA/list/DISFA_train_img_path_fold3.txt  
+        ├── data/DISFA/list/DISFA_train_img_path_fold3.txt
         ├── data/DISFA/list/DISFA_train_label_fold1.txt
         ├── data/DISFA/list/DISFA_train_label_fold2.txt
         ├── data/DISFA/list/DISFA_train_label_fold3.txt

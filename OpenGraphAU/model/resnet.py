@@ -2,30 +2,27 @@
 # Deep Residual Learning for Image Recognition
 # Kaiming He Xiangyu Zhang Shaoqing Ren Jian Sun
 
-import os
 import math
+import os
+import sys
+
 import torch
 import torch.nn as nn
 import torchvision.models
-__all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152']
 
-# you need to download the models to ~/.torch/models
-# model_urls = {
-#     'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
-#     'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
-#     'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
-#     'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
-#     'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
-# }
+sys.path.insert(0, ".")
 
+from OpenGraphAU.utils import download_checkpoint
 
-models_dir = os.path.expanduser('checkpoints')
+__all__ = ["ResNet", "resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]
+
+models_dir = os.path.expanduser("checkpoints")
 model_name = {
-    'resnet18': 'resnet18-5c106cde.pth',
-    'resnet34': 'resnet34-333f7ec4.pth',
-    'resnet50': 'resnet50-19c8e357.pth',
-    'resnet101': 'resnet101-5d3b4d8f.pth',
-    'resnet152': 'resnet152-b121ed2d.pth',
+    "resnet18": "resnet18-5c106cde.pth",
+    "resnet34": "resnet34-333f7ec4.pth",
+    "resnet50": "resnet50-19c8e357.pth",
+    "resnet101": "resnet101-5d3b4d8f.pth",
+    "resnet152": "resnet152-b121ed2d.pth",
 }
 
 
@@ -105,7 +102,6 @@ class Bottleneck(nn.Module):
 
 
 class ResNet(nn.Module):
-
     def __init__(self, block, layers, num_classes=1000):
         super(ResNet, self).__init__()
         self.inplanes = 64
@@ -117,12 +113,12 @@ class ResNet(nn.Module):
         self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
         self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
-        self.avgpool = nn.AdaptiveAvgPool2d((1,1))
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(512 * block.expansion, num_classes)
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
-                m.weight.data.normal_(0, math.sqrt(2. / n))
+                m.weight.data.normal_(0, math.sqrt(2.0 / n))
             elif isinstance(m, nn.BatchNorm2d):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
@@ -131,8 +127,13 @@ class ResNet(nn.Module):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
             downsample = nn.Sequential(
-                nn.Conv2d(self.inplanes, planes * block.expansion, kernel_size=1,
-                          stride=stride, bias=False),
+                nn.Conv2d(
+                    self.inplanes,
+                    planes * block.expansion,
+                    kernel_size=1,
+                    stride=stride,
+                    bias=False,
+                ),
                 nn.BatchNorm2d(planes * block.expansion),
             )
 
@@ -155,8 +156,8 @@ class ResNet(nn.Module):
         x = self.layer3(x)
         x = self.layer4(x)
 
-        b,c,h,w = x.shape
-        x = x.view(b,c,-1).permute(0,2,1)
+        b, c, h, w = x.shape
+        x = x.view(b, c, -1).permute(0, 2, 1)
 
         return x
 
@@ -169,7 +170,11 @@ def resnet18(pretrained=True, **kwargs):
     """
     model = ResNet(BasicBlock, [2, 2, 2, 2], **kwargs)
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name['resnet18'])))
+        path_model = os.path.join(models_dir, model_name["resnet18"])
+        if not os.path.exists(path_model):
+            download_checkpoint("https://download.pytorch.org/models/resnet18-5c106cde.pth")
+        model.load_state_dict(torch.load(path_model))
+
     return model
 
 
@@ -181,7 +186,11 @@ def resnet34(pretrained=True, **kwargs):
     """
     model = ResNet(BasicBlock, [3, 4, 6, 3], **kwargs)
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name['resnet34'])))
+        path_model = os.path.join(models_dir, model_name["resnet34"])
+        if not os.path.exists(path_model):
+            download_checkpoint("https://download.pytorch.org/models/resnet34-333f7ec4.pth")
+        model.load_state_dict(torch.load(path_model))
+
     return model
 
 
@@ -193,7 +202,10 @@ def resnet50(pretrained=True, **kwargs):
     """
     model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name['resnet50'])))
+        path_model = os.path.join(models_dir, model_name["resnet50"])
+        if not os.path.exists(path_model):
+            download_checkpoint("https://download.pytorch.org/models/resnet50-19c8e357.pth")
+        model.load_state_dict(torch.load(path_model))
     return model
 
 
@@ -205,7 +217,11 @@ def resnet101(pretrained=True, **kwargs):
     """
     model = ResNet(Bottleneck, [3, 4, 23, 3], **kwargs)
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name['resnet101'])))
+        path_model = os.path.join(models_dir, model_name["resnet101"])
+        if not os.path.exists(path_model):
+            download_checkpoint("https://download.pytorch.org/models/resnet101-5d3b4d8f.pth")
+        model.load_state_dict(torch.load(path_model))
+
     return model
 
 
@@ -217,5 +233,9 @@ def resnet152(pretrained=True, **kwargs):
     """
     model = ResNet(Bottleneck, [3, 8, 36, 3], **kwargs)
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name['resnet152'])))
+        path_model = os.path.join(models_dir, model_name["resnet152"])
+        if not os.path.exists(path_model):
+            download_checkpoint("https://download.pytorch.org/models/resnet152-b121ed2d.pth")
+        model.load_state_dict(torch.load(path_model))
+
     return model

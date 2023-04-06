@@ -6,3 +6,7 @@ tqdm
 timm
 easydict
 pyyaml == 5.4.1
+isort
+black
+pre-commit
+gdown

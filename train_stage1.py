@@ -1,42 +1,96 @@
+import logging
 import os
+
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
 import torch.optim as optim
+from torch.utils.data import DataLoader
 from tqdm import tqdm
-import logging
 
-from model.ANFL import MEFARG
+from conf import get_config, set_env, set_logger, set_outdir
 from dataset import *
+from model.ANFL import MEFARG
 from utils import *
-from conf import get_config,set_logger,set_outdir,set_env
 
 
 def get_dataloader(conf):
-    print('==> Preparing data...')
-    if conf.dataset == 'BP4D':
-        trainset = BP4D(conf.dataset_path, train=True, fold = conf.fold, transform=image_train(crop_size=conf.crop_size), crop_size=conf.crop_size, stage = 1)
-        train_loader = DataLoader(trainset, batch_size=conf.batch_size, shuffle=True, num_workers=conf.num_workers)
-        valset = BP4D(conf.dataset_path, train=False, fold=conf.fold, transform=image_test(crop_size=conf.crop_size), stage = 1)
-        val_loader = DataLoader(valset, batch_size=conf.batch_size, shuffle=False, num_workers=conf.num_workers)
+    print("==> Preparing data...")
+    if conf.dataset == "BP4D":
+        trainset = BP4D(
+            conf.dataset_path,
+            train=True,
+            fold=conf.fold,
+            transform=image_train(crop_size=conf.crop_size),
+            crop_size=conf.crop_size,
+            stage=1,
+        )
+        train_loader = DataLoader(
+            trainset,
+            batch_size=conf.batch_size,
+            shuffle=True,
+            num_workers=conf.num_workers,
+        )
+        valset = BP4D(
+            conf.dataset_path,
+            train=False,
+            fold=conf.fold,
+            transform=image_test(crop_size=conf.crop_size),
+            stage=1,
+        )
+        val_loader = DataLoader(
+            valset,
+            batch_size=conf.batch_size,
+            shuffle=False,
+            num_workers=conf.num_workers,
+        )
 
-    elif conf.dataset == 'DISFA':
-        trainset = DISFA(conf.dataset_path, train=True, fold = conf.fold, transform=image_train(crop_size=conf.crop_size), crop_size=conf.crop_size, stage = 1)
-        train_loader = DataLoader(trainset, batch_size=conf.batch_size, shuffle=True, num_workers=conf.num_workers)
-        valset = DISFA(conf.dataset_path, train=False, fold=conf.fold, transform=image_test(crop_size=conf.crop_size), stage = 1)
-        val_loader = DataLoader(valset, batch_size=conf.batch_size, shuffle=False, num_workers=conf.num_workers)
+    elif conf.dataset == "DISFA":
+        trainset = DISFA(
+            conf.dataset_path,
+            train=True,
+            fold=conf.fold,
+            transform=image_train(crop_size=conf.crop_size),
+            crop_size=conf.crop_size,
+            stage=1,
+        )
+        train_loader = DataLoader(
+            trainset,
+            batch_size=conf.batch_size,
+            shuffle=True,
+            num_workers=conf.num_workers,
+        )
+        valset = DISFA(
+            conf.dataset_path,
+            train=False,
+            fold=conf.fold,
+            transform=image_test(crop_size=conf.crop_size),
+            stage=1,
+        )
+        val_loader = DataLoader(
+            valset,
+            batch_size=conf.batch_size,
+            shuffle=False,
+            num_workers=conf.num_workers,
+        )
 
     return train_loader, val_loader, len(trainset), len(valset)
 
 
 # Train
-def train(conf,net,train_loader,optimizer,epoch,criterion):
+def train(conf, net, train_loader, optimizer, epoch, criterion):
     losses = AverageMeter()
     net.train()
     train_loader_len = len(train_loader)
-    for batch_idx, (inputs,  targets) in enumerate(tqdm(train_loader)):
-        adjust_learning_rate(optimizer, epoch, conf.epochs, conf.learning_rate, batch_idx, train_loader_len)
+    for batch_idx, (inputs, targets) in enumerate(tqdm(train_loader)):
+        adjust_learning_rate(
+            optimizer,
+            epoch,
+            conf.epochs,
+            conf.learning_rate,
+            batch_idx,
+            train_loader_len,
+        )
         targets = targets.float()
         if torch.cuda.is_available():
             inputs, targets = inputs.cuda(), targets.cuda()
@@ -50,7 +104,7 @@ def train(conf,net,train_loader,optimizer,epoch,criterion):
 
 
 # Val
-def val(net,val_loader,criterion):
+def val(net, val_loader, criterion):
     losses = AverageMeter()
     net.eval()
     statistics_list = None
@@ -70,21 +124,34 @@ def val(net,val_loader,criterion):
 
 
 def main(conf):
-    if conf.dataset == 'BP4D':
+    if conf.dataset == "BP4D":
         dataset_info = BP4D_infolist
-    elif conf.dataset == 'DISFA':
+    elif conf.dataset == "DISFA":
         dataset_info = DISFA_infolist
 
     start_epoch = 0
     # data
-    train_loader,val_loader,train_data_num,val_data_num = get_dataloader(conf)
-    train_weight = torch.from_numpy(np.loadtxt(os.path.join(conf.dataset_path, 'list', conf.dataset+'_weight_fold'+str(conf.fold)+'.txt')))
+    train_loader, val_loader, train_data_num, val_data_num = get_dataloader(conf)
+    train_weight = torch.from_numpy(
+        np.loadtxt(
+            os.path.join(
+                conf.dataset_path,
+                "list",
+                conf.dataset + "_weight_fold" + str(conf.fold) + ".txt",
+            )
+        )
+    )
 
     logging.info("Fold: [{} | {}  val_data_num: {} ]".format(conf.fold, conf.N_fold, val_data_num))
 
-    net = MEFARG(num_classes=conf.num_classes, backbone=conf.arc, neighbor_num=conf.neighbor_num, metric=conf.metric)
+    net = MEFARG(
+        num_classes=conf.num_classes,
+        backbone=conf.arc,
+        neighbor_num=conf.neighbor_num,
+        metric=conf.metric,
+    )
     # resume
-    if conf.resume != '':
+    if conf.resume != "":
         logging.info("Resume form | {} ]".format(conf.resume))
         net = load_state_dict(net, conf.resume)
 
@@ -93,51 +160,72 @@ def main(conf):
         train_weight = train_weight.cuda()
 
     criterion = WeightedAsymmetricLoss(weight=train_weight)
-    optimizer = optim.AdamW(net.parameters(),  betas=(0.9, 0.999), lr=conf.learning_rate, weight_decay=conf.weight_decay)
-    print('the init learning rate is ', conf.learning_rate)
+    optimizer = optim.AdamW(
+        net.parameters(),
+        betas=(0.9, 0.999),
+        lr=conf.learning_rate,
+        weight_decay=conf.weight_decay,
+    )
+    print("the init learning rate is ", conf.learning_rate)
 
-    #train and val
+    # train and val
     for epoch in range(start_epoch, conf.epochs):
-        lr = optimizer.param_groups[0]['lr']
+        lr = optimizer.param_groups[0]["lr"]
         logging.info("Epoch: [{} | {} LR: {} ]".format(epoch + 1, conf.epochs, lr))
-        train_loss = train(conf,net,train_loader,optimizer,epoch,criterion)
+        train_loss = train(conf, net, train_loader, optimizer, epoch, criterion)
         val_loss, val_mean_f1_score, val_f1_score, val_mean_acc, val_acc = val(net, val_loader, criterion)
 
         # log
-        infostr = {'Epoch:  {}   train_loss: {:.5f}  val_loss: {:.5f}  val_mean_f1_score {:.2f},val_mean_acc {:.2f}'
-                .format(epoch + 1, train_loss, val_loss, 100.* val_mean_f1_score, 100.* val_mean_acc)}
+        infostr = {
+            "Epoch:  {}   train_loss: {:.5f}  val_loss: {:.5f}  val_mean_f1_score {:.2f},val_mean_acc {:.2f}".format(
+                epoch + 1,
+                train_loss,
+                val_loss,
+                100.0 * val_mean_f1_score,
+                100.0 * val_mean_acc,
+            )
+        }
 
         logging.info(infostr)
-        infostr = {'F1-score-list:'}
+        infostr = {"F1-score-list:"}
         logging.info(infostr)
         infostr = dataset_info(val_f1_score)
         logging.info(infostr)
-        infostr = {'Acc-list:'}
+        infostr = {"Acc-list:"}
         logging.info(infostr)
         infostr = dataset_info(val_acc)
         logging.info(infostr)
 
         # save checkpoints
-        if (epoch+1) % 4 == 0:
+        if (epoch + 1) % 4 == 0:
             checkpoint = {
-                'epoch': epoch,
-                'state_dict': net.state_dict(),
-                'optimizer': optimizer.state_dict(),
+                "epoch": epoch,
+                "state_dict": net.state_dict(),
+                "optimizer": optimizer.state_dict(),
             }
-            torch.save(checkpoint, os.path.join(conf['outdir'], 'epoch' + str(epoch + 1) + '_model_fold' + str(conf.fold) + '.pth'))
+            torch.save(
+                checkpoint,
+                os.path.join(
+                    conf["outdir"],
+                    "epoch" + str(epoch + 1) + "_model_fold" + str(conf.fold) + ".pth",
+                ),
+            )
 
         checkpoint = {
-            'epoch': epoch,
-            'state_dict': net.state_dict(),
-            'optimizer': optimizer.state_dict(),
+            "epoch": epoch,
+            "state_dict": net.state_dict(),
+            "optimizer": optimizer.state_dict(),
         }
-        torch.save(checkpoint, os.path.join(conf['outdir'], 'cur_model_fold' + str(conf.fold) + '.pth'))
+        torch.save(
+            checkpoint,
+            os.path.join(conf["outdir"], "cur_model_fold" + str(conf.fold) + ".pth"),
+        )
 
 
 # ---------------------------------------------------------------------------------
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     conf = get_config()
     set_env(conf)
     # generate outdir name
@@ -145,4 +233,3 @@ if __name__=="__main__":
     # Set the logger
     set_logger(conf)
     main(conf)
-
