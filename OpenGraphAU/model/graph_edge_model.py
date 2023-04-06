@@ -1,10 +1,12 @@
+import math
+
 import torch
 import torch.nn as nn
-import math
 
 
 class CrossAttn(nn.Module):
-    """ cross attention Module"""
+    """cross attention Module"""
+
     def __init__(self, in_channels):
         super(CrossAttn, self).__init__()
         self.in_channels = in_channels
@@ -14,9 +16,9 @@ class CrossAttn(nn.Module):
         self.scale = (self.in_channels // 2) ** -0.5
         self.attend = nn.Softmax(dim=-1)
 
-        self.linear_k.weight.data.normal_(0, math.sqrt(2. / (in_channels // 2)))
-        self.linear_q.weight.data.normal_(0, math.sqrt(2. / (in_channels // 2)))
-        self.linear_v.weight.data.normal_(0, math.sqrt(2. / in_channels))
+        self.linear_k.weight.data.normal_(0, math.sqrt(2.0 / (in_channels // 2)))
+        self.linear_q.weight.data.normal_(0, math.sqrt(2.0 / (in_channels // 2)))
+        self.linear_v.weight.data.normal_(0, math.sqrt(2.0 / in_channels))
 
     def forward(self, y, x):
         query = self.linear_q(y)
@@ -38,7 +40,7 @@ class GEM(nn.Module):
         self.edge_proj = nn.Linear(in_channels, in_channels)
         self.bn = nn.BatchNorm2d(self.num_classes * self.num_classes)
 
-        self.edge_proj.weight.data.normal_(0, math.sqrt(2. / in_channels))
+        self.edge_proj.weight.data.normal_(0, math.sqrt(2.0 / in_channels))
         self.bn.weight.data.fill_(1)
         self.bn.bias.data.zero_()
 
@@ -51,6 +53,3 @@ class GEM(nn.Module):
         feat = self.ARM(feat_start, feat_end)
         edge = self.bn(self.edge_proj(feat))
         return edge
-
-
-

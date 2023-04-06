@@ -1,16 +1,22 @@
+import math
+
+import numpy as np
 import torch
 import torch.nn as nn
-import numpy as np
 import torch.nn.functional as F
-import math
-from .swin_transformer import swin_transformer_tiny, swin_transformer_small, swin_transformer_base
-from .resnet import resnet18, resnet50, resnet101
-from .graph import normalize_digraph
+
 from .basic_block import *
+from .graph import normalize_digraph
+from .resnet import resnet18, resnet50, resnet101
+from .swin_transformer import (
+    swin_transformer_base,
+    swin_transformer_small,
+    swin_transformer_tiny,
+)
 
 
 class GNN(nn.Module):
-    def __init__(self, in_channels, num_classes, neighbor_num=4, metric='dots'):
+    def __init__(self, in_channels, num_classes, neighbor_num=4, metric="dots"):
         super(GNN, self).__init__()
         # in_channels: dim of node feature
         # num_classes: num of nodes
@@ -25,13 +31,13 @@ class GNN(nn.Module):
         self.neighbor_num = neighbor_num
 
         # network
-        self.U = nn.Linear(self.in_channels,self.in_channels)
-        self.V = nn.Linear(self.in_channels,self.in_channels)
+        self.U = nn.Linear(self.in_channels, self.in_channels)
+        self.V = nn.Linear(self.in_channels, self.in_channels)
         self.bnv = nn.BatchNorm1d(num_classes)
 
         # init
-        self.U.weight.data.normal_(0, math.sqrt(2. / self.in_channels))
-        self.V.weight.data.normal_(0, math.sqrt(2. / self.in_channels))
+        self.U.weight.data.normal_(0, math.sqrt(2.0 / self.in_channels))
+        self.V.weight.data.normal_(0, math.sqrt(2.0 / self.in_channels))
         self.bnv.weight.data.fill_(1)
         self.bnv.bias.data.zero_()
 
@@ -39,20 +45,20 @@ class GNN(nn.Module):
         b, n, c = x.shape
 
         # build dynamical graph
-        if self.metric == 'dots':
+        if self.metric == "dots":
             si = x.detach()
-            si = torch.einsum('b i j , b j k -> b i k', si, si.transpose(1, 2))
+            si = torch.einsum("b i j , b j k -> b i k", si, si.transpose(1, 2))
             threshold = si.topk(k=self.neighbor_num, dim=-1, largest=True)[0][:, :, -1].view(b, n, 1)
             adj = (si >= threshold).float()
 
-        elif self.metric == 'cosine':
+        elif self.metric == "cosine":
             si = x.detach()
             si = F.normalize(si, p=2, dim=-1)
-            si = torch.einsum('b i j , b j k -> b i k', si, si.transpose(1, 2))
+            si = torch.einsum("b i j , b j k -> b i k", si, si.transpose(1, 2))
             threshold = si.topk(k=self.neighbor_num, dim=-1, largest=True)[0][:, :, -1].view(b, n, 1)
             adj = (si >= threshold).float()
 
-        elif self.metric == 'l1':
+        elif self.metric == "l1":
             si = x.detach().repeat(1, n, 1).view(b, n, n, c)
             si = torch.abs(si.transpose(1, 2) - si)
             si = si.sum(dim=-1)
@@ -64,13 +70,13 @@ class GNN(nn.Module):
 
         # GNN process
         A = normalize_digraph(adj)
-        aggregate = torch.einsum('b i j, b j k->b i k', A, self.V(x))
+        aggregate = torch.einsum("b i j, b j k->b i k", A, self.V(x))
         x = self.relu(x + self.bnv(aggregate + self.U(x)))
         return x
 
 
 class Head(nn.Module):
-    def __init__(self, in_channels, num_classes, neighbor_num=4, metric='dots'):
+    def __init__(self, in_channels, num_classes, neighbor_num=4, metric="dots"):
         super(Head, self).__init__()
         self.in_channels = in_channels
         self.num_classes = num_classes
@@ -79,7 +85,7 @@ class Head(nn.Module):
             layer = LinearBlock(self.in_channels, self.in_channels)
             class_linear_layers += [layer]
         self.class_linears = nn.ModuleList(class_linear_layers)
-        self.gnn = GNN(self.in_channels, self.num_classes,neighbor_num=neighbor_num,metric=metric)
+        self.gnn = GNN(self.in_channels, self.num_classes, neighbor_num=neighbor_num, metric=metric)
         self.sc = nn.Parameter(torch.FloatTensor(torch.zeros(self.num_classes, self.in_channels)))
         self.relu = nn.ReLU()
 
@@ -104,12 +110,18 @@ class Head(nn.Module):
 
 
 class MEFARG(nn.Module):
-    def __init__(self, num_classes=12, backbone='swin_transformer_base', neighbor_num=4, metric='dots'):
+    def __init__(
+        self,
+        num_classes=12,
+        backbone="swin_transformer_base",
+        neighbor_num=4,
+        metric="dots",
+    ):
         super(MEFARG, self).__init__()
-        if 'transformer' in backbone:
-            if backbone == 'swin_transformer_tiny':
+        if "transformer" in backbone:
+            if backbone == "swin_transformer_tiny":
                 self.backbone = swin_transformer_tiny()
-            elif backbone == 'swin_transformer_small':
+            elif backbone == "swin_transformer_small":
                 self.backbone = swin_transformer_small()
             else:
                 self.backbone = swin_transformer_base()
@@ -117,10 +129,10 @@ class MEFARG(nn.Module):
             self.out_channels = self.in_channels // 2
             self.backbone.head = None
 
-        elif 'resnet' in backbone:
-            if backbone == 'resnet18':
+        elif "resnet" in backbone:
+            if backbone == "resnet18":
                 self.backbone = resnet18()
-            elif backbone == 'resnet101':
+            elif backbone == "resnet101":
                 self.backbone = resnet101()
             else:
                 self.backbone = resnet50()
