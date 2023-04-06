@@ -1,9 +1,7 @@
 import logging
 import os
 
-import numpy as np
-import torch
-import torch.nn as nn
+import gdown
 
 from conf import get_config, set_env, set_logger, set_outdir
 from dataset import pil_loader
@@ -27,6 +25,21 @@ def main(conf):
 
     # resume
     if conf.resume != "":
+        if not os.path.exists(conf.resume):
+            print("Downloading checkpoint: ", conf.resume)
+            if "SwinT" in conf.resume:
+                gdown.download(
+                    id="1JSa-ft965qXJlVGvnoMepbkRkSm78_to", output="checkpoints/OpenGprahAU-SwinT_first_stage.pth"
+                )
+            if "SwinS" in conf.resume:
+                gdown.download(
+                    id="1GNjFKpd00nvgYIP2q7AzRSzfzEUfAqfT", output="checkpoints/OpenGprahAU-SwinS_first_stage.pth"
+                )
+            if "SwinB" in conf.resume:
+                gdown.download(
+                    id="1nWwowmq4pQn1ACnSOOeyBy6-n0rmqTQ9", output="checkpoints/OpenGprahAU-SwinB_first_stage.pth"
+                )
+
         logging.info("Resume form | {} ]".format(conf.resume))
         net = load_state_dict(net, conf.resume)
 
@@ -56,6 +69,7 @@ def main(conf):
 
         path = conf.input.split(".")[0] + "_pred.jpg"
         cv2.imwrite(path, img)
+        print("Output is saved at: ", path)
 
 
 # ---------------------------------------------------------------------------------
@@ -63,6 +77,7 @@ def main(conf):
 if __name__ == "__main__":
     conf = get_config()
     conf.evaluate = True
+    conf.draw_text = True
     set_env(conf)
     # generate outdir name
     set_outdir(conf)
