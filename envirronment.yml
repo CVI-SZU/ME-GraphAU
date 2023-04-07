@@ -1,0 +1,19 @@
+name: env
+channels:
+  - defaults
+dependencies:
+  - python>=3.8
+  - torch >= 1.4.0
+  - torchvision
+  - pillow
+  - numpy
+  - tqdm
+  - timm
+  - easydict
+  - pyyaml == 5.4.1
+  - isort
+  - black
+  - pre-commit
+  - gdown
+platforms:
+  - linux-64
