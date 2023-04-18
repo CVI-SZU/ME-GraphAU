@@ -1,16 +1,15 @@
 import logging
-import os
+import sys
 
-import numpy as np
-import torch
-import torch.nn as nn
+sys.path.insert(0, ".")
+
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from conf import get_config, set_env, set_logger, set_outdir
-from dataset import *
 from model.ANFL import MEFARG
-from utils import *
+from OpenGraphAU.dataset import *
+from OpenGraphAU.utils import *
 
 
 def get_dataloader(conf):
@@ -69,9 +68,7 @@ def main(conf):
     test_mean_f1_score, test_f1_score, test_mean_acc, test_acc = test(net, test_loader)
 
     # log
-    infostr = {
-        "test_mean_f1_score {:.2f} test_mean_acc {:.2f}".format(100.0 * test_mean_f1_score, 100.0 * test_mean_acc)
-    }
+    infostr = {"test_mean_f1_score {:.2f} test_mean_acc {:.2f}".format(100.0 * test_mean_f1_score, 100.0 * test_mean_acc)}
     logging.info(infostr)
     infostr = {"F1-score-list:"}
     logging.info(infostr)
