@@ -715,7 +715,11 @@ def swin_transformer_tiny(pretrained=True, **kwargs):
         **kwargs,
     )
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name["swin_transformer_tiny"]))["model"])
+        model.load_state_dict(
+            torch.load(os.path.join(models_dir, model_name["swin_transformer_tiny"]), map_location=torch.device("cpu"))[
+                "model"
+            ]
+        )
     return model
 
 
@@ -736,7 +740,11 @@ def swin_transformer_small(pretrained=True, **kwargs):
         **kwargs,
     )
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name["swin_transformer_small"]))["model"])
+        model.load_state_dict(
+            torch.load(os.path.join(models_dir, model_name["swin_transformer_small"]), map_location=torch.device("cpu"))[
+                "model"
+            ]
+        )
     return model
 
 
@@ -757,7 +765,11 @@ def swin_transformer_base(pretrained=True, **kwargs):
         **kwargs,
     )
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name["swin_transformer_base"]))["model"])
+        model.load_state_dict(
+            torch.load(os.path.join(models_dir, model_name["swin_transformer_base"]), map_location=torch.device("cpu"))[
+                "model"
+            ]
+        )
     return model
 
 
