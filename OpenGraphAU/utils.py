@@ -303,15 +303,63 @@ def hybrid_infolist(list):
 
 
 def hybrid_prediction_infolist(pred, thresh):
-    infostr_pred_probs = {
-        "AU1: {:.2f} AU2: {:.2f} AU4: {:.2f} AU5: {:.2f} AU6: {:.2f} AU7: {:.2f} AU9: {:.2f} AU10: {:.2f} AU11: {:.2f} \
-     AU12: {:.2f} AU13: {:.2f} AU14: {:.2f} AU15: {:.2f} AU16: {:.2f} AU17: {:.2f} AU18: {:.2f} AU19: {:.2f} AU20: {:.2f} \
-     AU22: {:.2f} AU23: {:.2f} AU24: {:.2f} AU25: {:.2f} AU26: {:.2f} AU27: {:.2f} AU32: {:.2f} AU38: {:.2f} AU39: {:.2f}\
-      AUL1: {:.2f} AUR1: {:.2f} AUL2: {:.2f} AUR2: {:.2f} AUL4: {:.2f} AUR4: {:.2f} AUL6: {:.2f} AUR6: {:.2f} AUL10: {:.2f} \
-      AUR10: {:.2f} AUL12: {:.2f} AUR12: {:.2f} AUL14: {:.2f} AUR14: {:.2f}".format(
-            *[100.0 * x for x in pred]
-        )
-    }
+    # infostr_pred_probs = {
+    #     "AU1: {:.2f} AU2: {:.2f} AU4: {:.2f} AU5: {:.2f} AU6: {:.2f} AU7: {:.2f} AU9: {:.2f} AU10: {:.2f} AU11: {:.2f} \
+    #  AU12: {:.2f} AU13: {:.2f} AU14: {:.2f} AU15: {:.2f} AU16: {:.2f} AU17: {:.2f} AU18: {:.2f} AU19: {:.2f} AU20: {:.2f} \
+    #  AU22: {:.2f} AU23: {:.2f} AU24: {:.2f} AU25: {:.2f} AU26: {:.2f} AU27: {:.2f} AU32: {:.2f} AU38: {:.2f} AU39: {:.2f}\
+    #   AUL1: {:.2f} AUR1: {:.2f} AUL2: {:.2f} AUR2: {:.2f} AUL4: {:.2f} AUR4: {:.2f} AUL6: {:.2f} AUR6: {:.2f} AUL10: {:.2f} \
+    #   AUR10: {:.2f} AUL12: {:.2f} AUR12: {:.2f} AUL14: {:.2f} AUR14: {:.2f}".format(
+    #         *[100.0 * x for x in pred]
+    #     )
+    # }
+
+    AU_index_list = [
+        "AU1",
+        "AU2",
+        "AU4",
+        "AU5",
+        "AU6",
+        "AU7",
+        "AU9",
+        "AU10",
+        "AU11",
+        "AU12",
+        "AU13",
+        "AU14",
+        "AU15",
+        "AU16",
+        "AU17",
+        "AU18",
+        "AU19",
+        "AU20",
+        "AU22",
+        "AU23",
+        "AU24",
+        "AU25",
+        "AU26",
+        "AU27",
+        "AU32",
+        "AU38",
+        "AU39",
+        "AUL1",
+        "AUR1",
+        "AUL2",
+        "AUR2",
+        "AUL4",
+        "AUR4",
+        "AUL6",
+        "AUR6",
+        "AUL10",
+        "AUR10",
+        "AUL12",
+        "AUR12",
+        "AUL14",
+        "AUR14",
+    ]
+
+    infostr_pred_probs = {}
+    for key, value in zip(AU_index_list, pred):
+        infostr_pred_probs[key] = round(value * 100, 2)
 
     AU_name_lists = [
         "Inner brow raiser",
