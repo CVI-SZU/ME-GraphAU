@@ -458,13 +458,13 @@ def load_state_dict(model, path):
     state_dict = checkpoints["state_dict"]
     from collections import OrderedDict
 
-    # new_state_dict = OrderedDict()
-    # for k, v in state_dict.items():
-    #     if "module." in k:
-    #         k = k[7:]  # remove `module.`
-    #     new_state_dict[k] = v
+    new_state_dict = OrderedDict()
+    for k, v in state_dict.items():
+        if "module." in k:
+            k = k[7:]  # remove `module.`
+        new_state_dict[k] = v
     # load params
-    model.load_state_dict(state_dict, strict=False)
+    model.load_state_dict(new_state_dict, strict=False)
     return model
 
 
