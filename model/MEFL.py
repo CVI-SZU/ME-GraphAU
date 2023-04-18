@@ -86,6 +86,9 @@ class GNN(nn.Module):
         if dev >= 0:
             start = self.start.to(dev)
             end = self.end.to(dev)
+        else:
+            start = self.start
+            end = self.end
 
         # GNN Layer 1:
         res = x
