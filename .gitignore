@@ -265,3 +265,4 @@ pyrightconfig.json
 *.idea/
 checkpoints/
 *.results/
+data/
