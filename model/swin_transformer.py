@@ -116,7 +116,7 @@ class WindowAttention(nn.Module):
         # get pair-wise relative position index for each token inside the window
         coords_h = torch.arange(self.window_size[0])
         coords_w = torch.arange(self.window_size[1])
-        coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
+        coords = torch.stack(torch.meshgrid([coords_h, coords_w], indexing="ij"))  # 2, Wh, Ww
         coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
         relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
         relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
@@ -715,7 +715,11 @@ def swin_transformer_tiny(pretrained=True, **kwargs):
         **kwargs,
     )
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name["swin_transformer_tiny"]))["model"])
+        model.load_state_dict(
+            torch.load(os.path.join(models_dir, model_name["swin_transformer_tiny"]), map_location=torch.device("cpu"))[
+                "model"
+            ]
+        )
     return model
 
 
@@ -736,7 +740,11 @@ def swin_transformer_small(pretrained=True, **kwargs):
         **kwargs,
     )
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name["swin_transformer_small"]))["model"])
+        model.load_state_dict(
+            torch.load(os.path.join(models_dir, model_name["swin_transformer_small"]), map_location=torch.device("cpu"))[
+                "model"
+            ]
+        )
     return model
 
 
@@ -757,7 +765,11 @@ def swin_transformer_base(pretrained=True, **kwargs):
         **kwargs,
     )
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(models_dir, model_name["swin_transformer_base"]))["model"])
+        model.load_state_dict(
+            torch.load(os.path.join(models_dir, model_name["swin_transformer_base"]), map_location=torch.device("cpu"))[
+                "model"
+            ]
+        )
     return model
 
 
