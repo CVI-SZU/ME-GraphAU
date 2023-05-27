@@ -44,6 +44,7 @@ parser.add_argument('--resume', default='', type=str, metavar='path', help='path
 #demo img input
 parser.add_argument('--input', default='', type=str, metavar='path', help='path to img for predicting')
 parser.add_argument('--draw_text', action='store_true', help='draw AU predicting results on img')
+parser.add_argument('--stage', default=1, type=int, choices=[1, 2], help='model stage')
 
 
 # ------------------------------
