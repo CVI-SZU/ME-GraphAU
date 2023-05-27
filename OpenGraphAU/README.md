@@ -75,7 +75,7 @@ Hybrid Dataset
 ## Demo
 - to detect facial action units in an image, run:
 ```
-python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-ResNet50_first_stage.pth --input demo_imgs/1014.jpg
+python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-ResNet50_first_stage.pth --input demo_imgs/1014.jpg  --draw_text
 ```
 
 ## Training and Testing
@@ -88,5 +88,23 @@ python train_stage1.py --arc resnet50 --exp-name OpenGprahAU-ResNet50_first_stag
 
 - to test the first stage of our approach (SwinT) on hybrid Dataset, run:
 ```
-python test.py --arc swin_transformer_tiny --exp-name test_OpenGprahAU-ResNet50_first_stage  --resume checkpoints/OpenGprahAU-SwinT_first_stage.pth --draw_text
+python test_stage1.py --arc swin_transformer_tiny --exp-name test_OpenGprahAU-SwinT_first_stage  --resume ./results/OpenGprahAU-SwinT_first_stage/bs_64_seed_0_lr_2e-05/best_model.pth
 ```
+
+
+
+
+- to train the second stage of our approach (ResNet-50) on hybrid Dataset, run:
+```
+python train_stage2.py --arc resnet50 --exp-name OpenGprahAU-ResNet50_second_stage -b 512 -lr 0.00001  --resume checkpoints/OpenGprahAU-ResNet50_first_stage.pth
+```
+
+
+- to test the second stage of our approach (SwinT) on hybrid Dataset, run:
+```
+python test_stage2.py --arc swin_transformer_tiny --exp-name test_OpenGprahAU-SwinT_second_stage  --resume ./results/OpenGprahAU-SwinT_second_stage/bs_64_seed_0_lr_1e-05/best_model.pth
+```
+
+
+
+
