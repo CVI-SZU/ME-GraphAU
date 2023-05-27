@@ -73,9 +73,14 @@ Hybrid Dataset
 
 
 ## Demo
-- to detect facial action units in an image, run:
+- to detect facial action units in a facial image using our stage1 model, run:
 ```
 python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-ResNet50_first_stage.pth --input demo_imgs/1014.jpg  --draw_text
+```
+
+- to detect facial action units in a facial image using our stage2 model, run:
+```
+python demo.py --arc resnet50 --exp-name demo --resume checkpoints/OpenGprahAU-ResNet50_second_stage.pth --input demo_imgs/1014.jpg  --draw_text
 ```
 
 ## Training and Testing
