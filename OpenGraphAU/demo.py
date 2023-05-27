@@ -4,7 +4,6 @@ import torch
 import torch.nn as nn
 import logging
 from dataset import pil_loader
-from model.ANFL import MEFARG
 from utils import *
 from conf import get_config,set_logger,set_outdir,set_env
 
@@ -15,9 +14,13 @@ def main(conf):
     # data
     img_path = conf.input
 
-
-    net = MEFARG(num_main_classes=conf.num_main_classes, num_sub_classes=conf.num_sub_classes, backbone=conf.arc, neighbor_num=conf.neighbor_num, metric=conf.metric)
-
+    if conf.stage == 1:
+        from model.ANFL import MEFARG
+        net = MEFARG(num_main_classes=conf.num_main_classes, num_sub_classes=conf.num_sub_classes, backbone=conf.arc, neighbor_num=conf.neighbor_num, metric=conf.metric)
+    else:
+        from model.MEFL import MEFARG
+        net = MEFARG(num_main_classes=conf.num_main_classes, num_sub_classes=conf.num_sub_classes, backbone=conf.arc)
+    
     # resume
     if conf.resume != '':
         logging.info("Resume form | {} ]".format(conf.resume))
