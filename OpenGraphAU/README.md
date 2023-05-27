@@ -66,7 +66,7 @@ Hybrid Dataset
 |`Ours (MobileNetV3)`| -| - |  - |
 |`Ours (ResNet-18)`| -| - | - |
 |`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/1UMnpbj_YKlqHF1m0DHV0KYD3qmcOmeXp/view?usp=sharing)| 23.24 | 93.31 |
-|`Ours (Swin-Tiny)`| - | - | - |
+|`Ours (Swin-Tiny)`|[link](https://drive.google.com/file/d/1yRWnYY5BR_FDiquaKnzf_aCdkyjZM77E/view?usp=sharing)| 22.74 | 93.37 |
 |`Ours (Swin-Small)`| - | - | - |
 |`Ours (Swin-Base)`| - | - | - |
 
