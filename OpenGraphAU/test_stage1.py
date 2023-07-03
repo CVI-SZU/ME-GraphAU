@@ -20,17 +20,15 @@ def get_dataloader(conf):
     return test_loader, len(testset)
 
 
-
-#Val
-def test(net, test_loader):
+# Test
+def test(net,test_loader):
     net.eval()
     statistics_list = None
     for batch_idx, (inputs, targets) in enumerate(tqdm(test_loader)):
-        targets = targets.float()
         with torch.no_grad():
+            targets = targets.float()
             if torch.cuda.is_available():
                 inputs, targets = inputs.cuda(), targets.cuda()
-            # outputs, _ = net(inputs)
             outputs = net(inputs)
             update_list = statistics(outputs, targets.detach(), 0.5)
             statistics_list = update_statistics_list(statistics_list, update_list)
@@ -53,8 +51,12 @@ def main(conf):
         logging.info("Resume form | {} ]".format(conf.resume))
         net = load_state_dict(net, conf.resume)
 
+
+    # if torch.cuda.is_available():
+    #     net = nn.DataParallel(net).cuda()
+
     if torch.cuda.is_available():
-        net = nn.DataParallel(net).cuda()
+        net = net.cuda()
 
     #test
     test_mean_f1_score, test_f1_score, test_mean_acc, test_acc = test(net, test_loader)

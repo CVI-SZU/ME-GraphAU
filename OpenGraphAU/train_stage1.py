@@ -12,6 +12,7 @@ from dataset import *
 from utils import *
 from conf import get_config,set_logger,set_outdir,set_env
 
+from sam import SAM
 
 def get_dataloader(conf):
     print('==> Preparing data...')
@@ -33,11 +34,18 @@ def train(conf,net,train_loader,optimizer,epoch,criterion):
         targets = targets.float()
         if torch.cuda.is_available():
             inputs, targets = inputs.cuda(), targets.cuda()
-        optimizer.zero_grad()
+        # optimizer.zero_grad()
+        # first forward-backward step
+        enable_running_stats(net)
         outputs = net(inputs)
         loss = criterion(outputs, targets)
         loss.backward()
-        optimizer.step()
+        optimizer.first_step(zero_grad=True)
+
+        disable_running_stats(net)
+        criterion(net(inputs), targets).backward()
+        optimizer.second_step(zero_grad=True)
+        # optimizer.step()
         losses.update(loss.data.item(), inputs.size(0))
     return losses.avg
 
@@ -86,7 +94,9 @@ def main(conf):
 
     criterion = WeightedAsymmetricLoss(weight=train_weight)
 
-    optimizer = optim.AdamW(net.parameters(),  betas=(0.9, 0.999), lr=conf.learning_rate, weight_decay=conf.weight_decay)
+    # optimizer = optim.AdamW(net.parameters(),  betas=(0.9, 0.999), lr=conf.learning_rate, weight_decay=conf.weight_decay)
+    optimizer = SAM(net.parameters(), optim.AdamW, rho=2.0, adaptive=True, lr=conf.learning_rate, weight_decay=conf.weight_decay,  betas=(0.9, 0.999))
+
     print('the init learning rate is ', conf.learning_rate)
 
     #train and val
