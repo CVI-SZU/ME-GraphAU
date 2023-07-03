@@ -57,7 +57,7 @@ Hybrid Dataset
 |`Ours (Swin-Tiny)`| [link](https://drive.google.com/file/d/1JSa-ft965qXJlVGvnoMepbkRkSm78_to/view?usp=share_link) | 22.66 | 92.97 |
 |`Ours (Swin-Small)`| [link](https://drive.google.com/file/d/1GNjFKpd00nvgYIP2q7AzRSzfzEUfAqfT/view?usp=share_link) | 24.49 | 92.84 |
 |`Ours (Swin-Base)`| [link](https://drive.google.com/file/d/1nWwowmq4pQn1ACnSOOeyBy6-n0rmqTQ9/view?usp=share_link) | 23.53 | 92.91 |
-|`Ours (MAE-VIT)`| -  | - | - |
+|`Ours (MAE-VIT)`| [link](https://drive.google.com/file/d/126i4dn6u0v-npYR8UaIM8migdSsI5u__/view?usp=share_link)  | - | - |
 
 
 ### Stage2:
