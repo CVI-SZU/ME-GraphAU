@@ -9,6 +9,7 @@ from .resnet import resnet18, resnet50, resnet101
 from .graph import create_e_matrix
 from .graph_edge_model import GEM
 from .basic_block import *
+from .modeling_pretrain import pretrain_mae_base_patch16_224
 
 # Gated GCN Used to Learn Multi-dimensional Edge Features and Node Features
 class GNNLayer(nn.Module):
@@ -203,6 +204,10 @@ class MEFARG(nn.Module):
             self.in_channels = self.backbone.fc.weight.shape[1]
             self.out_channels = self.in_channels // 4
             self.backbone.fc = None
+        elif 'mae' in backbone:
+            self.backbone = pretrain_mae_base_patch16_224()
+            self.in_channels = self.backbone.embed_dim
+            self.out_channels = self.in_channels // 2
         else:
             raise Exception("Error: wrong backbone name: ", backbone)
 

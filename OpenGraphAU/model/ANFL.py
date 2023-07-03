@@ -7,7 +7,7 @@ from .swin_transformer import swin_transformer_tiny, swin_transformer_small, swi
 from .resnet import resnet18, resnet50, resnet101
 from .graph import normalize_digraph
 from .basic_block import *
-
+from .modeling_pretrain import pretrain_mae_base_patch16_224
 
 class GNN(nn.Module):
     def __init__(self, in_channels, num_classes, neighbor_num=4, metric='dots'):
@@ -159,6 +159,11 @@ class MEFARG(nn.Module):
             self.in_channels = self.backbone.fc.weight.shape[1]
             self.out_channels = self.in_channels // 4
             self.backbone.fc = None
+
+        elif 'mae' in backbone:
+            self.backbone = pretrain_mae_base_patch16_224()
+            self.in_channels = self.backbone.embed_dim
+            self.out_channels = self.in_channels // 2
         else:
             raise Exception("Error: wrong backbone name: ", backbone)
 
