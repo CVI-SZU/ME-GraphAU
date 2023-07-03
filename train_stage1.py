@@ -12,22 +12,16 @@ from dataset import *
 from utils import *
 from conf import get_config,set_logger,set_outdir,set_env
 
+from sam import SAM
 
 def get_dataloader(conf):
     print('==> Preparing data...')
-    if conf.dataset == 'BP4D':
-        trainset = BP4D(conf.dataset_path, train=True, fold = conf.fold, transform=image_train(crop_size=conf.crop_size), crop_size=conf.crop_size, stage = 1)
-        train_loader = DataLoader(trainset, batch_size=conf.batch_size, shuffle=True, num_workers=conf.num_workers)
-        valset = BP4D(conf.dataset_path, train=False, fold=conf.fold, transform=image_test(crop_size=conf.crop_size), stage = 1)
-        val_loader = DataLoader(valset, batch_size=conf.batch_size, shuffle=False, num_workers=conf.num_workers)
-
-    elif conf.dataset == 'DISFA':
-        trainset = DISFA(conf.dataset_path, train=True, fold = conf.fold, transform=image_train(crop_size=conf.crop_size), crop_size=conf.crop_size, stage = 1)
-        train_loader = DataLoader(trainset, batch_size=conf.batch_size, shuffle=True, num_workers=conf.num_workers)
-        valset = DISFA(conf.dataset_path, train=False, fold=conf.fold, transform=image_test(crop_size=conf.crop_size), stage = 1)
-        val_loader = DataLoader(valset, batch_size=conf.batch_size, shuffle=False, num_workers=conf.num_workers)
-
+    trainset = HybridDataset(conf.dataset_path, phase='train', transform=image_train(crop_size=conf.crop_size), stage = 1)
+    train_loader = DataLoader(trainset, batch_size=conf.batch_size, shuffle=True, num_workers=conf.num_workers)
+    valset = HybridDataset(conf.dataset_path, phase='val', transform=image_eval(crop_size=conf.crop_size), stage = 1)
+    val_loader = DataLoader(valset, batch_size=conf.batch_size, shuffle=False, num_workers=conf.num_workers)
     return train_loader, val_loader, len(trainset), len(valset)
+
 
 
 # Train
@@ -40,11 +34,18 @@ def train(conf,net,train_loader,optimizer,epoch,criterion):
         targets = targets.float()
         if torch.cuda.is_available():
             inputs, targets = inputs.cuda(), targets.cuda()
-        optimizer.zero_grad()
+        # optimizer.zero_grad()
+        # first forward-backward step
+        enable_running_stats(net)
         outputs = net(inputs)
         loss = criterion(outputs, targets)
         loss.backward()
-        optimizer.step()
+        optimizer.first_step(zero_grad=True)
+
+        disable_running_stats(net)
+        criterion(net(inputs), targets).backward()
+        optimizer.second_step(zero_grad=True)
+        # optimizer.step()
         losses.update(loss.data.item(), inputs.size(0))
     return losses.avg
 
@@ -70,19 +71,18 @@ def val(net,val_loader,criterion):
 
 
 def main(conf):
-    if conf.dataset == 'BP4D':
-        dataset_info = BP4D_infolist
-    elif conf.dataset == 'DISFA':
-        dataset_info = DISFA_infolist
+
+    dataset_info = hybrid_infolist
+
 
     start_epoch = 0
+    best_val_mean_f1_score = 0
     # data
     train_loader,val_loader,train_data_num,val_data_num = get_dataloader(conf)
-    train_weight = torch.from_numpy(np.loadtxt(os.path.join(conf.dataset_path, 'list', conf.dataset+'_weight_fold'+str(conf.fold)+'.txt')))
+    train_weight = torch.from_numpy(np.loadtxt(os.path.join(conf.dataset_path, 'list', conf.dataset+'_train_weight.txt')))
+    logging.info("[ val_data_num: {} ]".format(val_data_num))
 
-    logging.info("Fold: [{} | {}  val_data_num: {} ]".format(conf.fold, conf.N_fold, val_data_num))
-
-    net = MEFARG(num_classes=conf.num_classes, backbone=conf.arc, neighbor_num=conf.neighbor_num, metric=conf.metric)
+    net = MEFARG(num_main_classes=conf.num_main_classes, num_sub_classes=conf.num_sub_classes, backbone=conf.arc, neighbor_num=conf.neighbor_num, metric=conf.metric)
     # resume
     if conf.resume != '':
         logging.info("Resume form | {} ]".format(conf.resume))
@@ -93,18 +93,21 @@ def main(conf):
         train_weight = train_weight.cuda()
 
     criterion = WeightedAsymmetricLoss(weight=train_weight)
-    optimizer = optim.AdamW(net.parameters(),  betas=(0.9, 0.999), lr=conf.learning_rate, weight_decay=conf.weight_decay)
+
+    # optimizer = optim.AdamW(net.parameters(),  betas=(0.9, 0.999), lr=conf.learning_rate, weight_decay=conf.weight_decay)
+    optimizer = SAM(net.parameters(), optim.AdamW, rho=2.0, adaptive=True, lr=conf.learning_rate, weight_decay=conf.weight_decay,  betas=(0.9, 0.999))
+
     print('the init learning rate is ', conf.learning_rate)
 
     #train and val
     for epoch in range(start_epoch, conf.epochs):
         lr = optimizer.param_groups[0]['lr']
         logging.info("Epoch: [{} | {} LR: {} ]".format(epoch + 1, conf.epochs, lr))
-        train_loss = train(conf,net,train_loader,optimizer,epoch,criterion)
+        train_loss = train(conf, net, train_loader, optimizer, epoch, criterion)
         val_loss, val_mean_f1_score, val_f1_score, val_mean_acc, val_acc = val(net, val_loader, criterion)
 
         # log
-        infostr = {'Epoch:  {}   train_loss: {:.5f}  val_loss: {:.5f}  val_mean_f1_score {:.2f},val_mean_acc {:.2f}'
+        infostr = {'Epoch:  {}   train_loss: {:.5f}  val_loss: {:.5f}  val_mean_f1_score {:.2f}, val_mean_acc {:.2f}'
                 .format(epoch + 1, train_loss, val_loss, 100.* val_mean_f1_score, 100.* val_mean_acc)}
 
         logging.info(infostr)
@@ -118,20 +121,21 @@ def main(conf):
         logging.info(infostr)
 
         # save checkpoints
-        if (epoch+1) % 4 == 0:
+        if best_val_mean_f1_score < val_mean_f1_score:
+            best_val_mean_f1_score = val_mean_f1_score
             checkpoint = {
                 'epoch': epoch,
                 'state_dict': net.state_dict(),
                 'optimizer': optimizer.state_dict(),
             }
-            torch.save(checkpoint, os.path.join(conf['outdir'], 'epoch' + str(epoch + 1) + '_model_fold' + str(conf.fold) + '.pth'))
+            torch.save(checkpoint, os.path.join(conf['outdir'], 'best_model.pth'))
 
         checkpoint = {
             'epoch': epoch,
             'state_dict': net.state_dict(),
             'optimizer': optimizer.state_dict(),
         }
-        torch.save(checkpoint, os.path.join(conf['outdir'], 'cur_model_fold' + str(conf.fold) + '.pth'))
+        torch.save(checkpoint, os.path.join(conf['outdir'], 'cur_model.pth'))
 
 
 # ---------------------------------------------------------------------------------
