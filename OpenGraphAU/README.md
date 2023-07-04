@@ -68,7 +68,7 @@ Hybrid Dataset
 |`Ours (ResNet-18)`|[link](https://drive.google.com/file/d/1CzWgr2ywt7TmxHLWM5tg1VaEbgGYyAZ4/view?usp=sharing) | 22.51 | 93.23 |
 |`Ours (ResNet-50)`| [link](https://drive.google.com/file/d/1UMnpbj_YKlqHF1m0DHV0KYD3qmcOmeXp/view?usp=sharing)| 23.24 | 93.31 |
 |`Ours (Swin-Small)`| - | 22.99 | 93.37 |
-|`Ours (MAE-VIT)`| [link](https://drive.google.com/file/d/1yE_kvSCxHC3ULsJYQU22g0LuNTjNeijP/view?usp=share_link) | - | - |
+|`Ours (MAE-VIT)`| [link](https://drive.google.com/file/d/1yE_kvSCxHC3ULsJYQU22g0LuNTjNeijP/view?usp=share_link) | 25.29 | 93.76 |
 
 
 ## Demo
