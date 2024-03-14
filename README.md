@@ -149,13 +149,6 @@ Download these files (e.g. ```ME-GraphAU_swin_base_BP4D.zip```) and unzip them, 
 =
 if the code or method help you in the research, please cite the following paper:
 ```
-@article{luo2022learning,
-title = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
-author = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
-journal={arXiv preprint arXiv:2205.01782},
-year={2022}
-}
-
 
 @inproceedings{luo2022learning,
   title     = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
@@ -165,5 +158,15 @@ year={2022}
   pages     = {1239--1246},
   year      = {2022}
 }
+
+
+@article{song2022gratis,
+    title={Gratis: Deep learning graph representation with task-specific topology and multi-dimensional edge features},
+    author={Song, Siyang and Song, Yuxin and Luo, Cheng and Song, Zhiyuan and Kuzucu, Selim and Jia, Xi and Guo, Zhijiang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
+    journal={arXiv preprint arXiv:2211.12482},
+    year={2022}
+}
+
+
 
 ```
