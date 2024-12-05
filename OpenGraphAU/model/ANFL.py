@@ -141,27 +141,27 @@ class MEFARG(nn.Module):
         super(MEFARG, self).__init__()
         if 'transformer' in backbone:
             if backbone == 'swin_transformer_tiny':
-                self.backbone = swin_transformer_tiny()
+                self.backbone = swin_transformer_tiny(pretrained=False)
             elif backbone == 'swin_transformer_small':
-                self.backbone = swin_transformer_small()
+                self.backbone = swin_transformer_small(pretrained=False)
             else:
-                self.backbone = swin_transformer_base()
+                self.backbone = swin_transformer_base(pretrained=False)
             self.in_channels = self.backbone.num_features
             self.out_channels = self.in_channels // 2
             self.backbone.head = None
         elif 'resnet' in backbone:
             if backbone == 'resnet18':
-                self.backbone = resnet18()
+                self.backbone = resnet18(pretrained=False)
             elif backbone == 'resnet101':
-                self.backbone = resnet101()
+                self.backbone = resnet101(pretrained=False)
             else:
-                self.backbone = resnet50()
+                self.backbone = resnet50(pretrained=False)
             self.in_channels = self.backbone.fc.weight.shape[1]
             self.out_channels = self.in_channels // 4
             self.backbone.fc = None
 
         elif 'mae' in backbone:
-            self.backbone = pretrain_mae_base_patch16_224()
+            self.backbone = pretrain_mae_base_patch16_224(pretrained=False)
             self.in_channels = self.backbone.embed_dim
             self.out_channels = self.in_channels // 2
         else:
