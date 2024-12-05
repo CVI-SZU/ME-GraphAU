@@ -91,17 +91,17 @@ def get_config():
     cfg = parser2dict()
     if cfg.dataset == 'BP4D':
         with open('config/BP4D_config.yaml', 'r') as f:
-            datasets_cfg = yaml.load(f)
+            datasets_cfg = yaml.safe_load(f)
             datasets_cfg = edict(datasets_cfg)
 
     elif cfg.dataset == 'DISFA':
         with open('config/DISFA_config.yaml', 'r') as f:
-            datasets_cfg = yaml.load(f)
+            datasets_cfg = yaml.safe_load(f)
             datasets_cfg = edict(datasets_cfg)
 
     elif cfg.dataset == 'hybrid':
         with open('config/hybrid_config.yaml', 'r') as f:
-            datasets_cfg = yaml.load(f)
+            datasets_cfg = yaml.safe_load(f)
             datasets_cfg = edict(datasets_cfg)
     else:
         raise Exception("Unkown Datsets:",cfg.dataset)
