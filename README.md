@@ -7,6 +7,15 @@
 
 * **20/08/2025 — We released [AU-Canvas](https://github.com/awakening-ai/AUCanvas), a visualization tool that offers an intuitive UI for facial action unit (FAU) detection and enhanced visualization.**
 
+### Example running on a RTX 3090 GPU (Avg. FPS>50):
+<table border="0" style="width: 100%; text-align: left; margin-top: 20px;">
+<!--   <tr> -->
+<!--       <td> -->
+          <video src="https://github.com/user-attachments/assets/69737b41-f215-4b69-9c10-08ae26ba5dc3" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/7a672e51-5a0a-4730-b02e-e5015570ba1b" width="100%" controls autoplay loop></video>
+</table>
+
+
 * 12/11/2022 We released an [OpenGraphAU](OpenGraphAU) or [OpenGraphAU](https://github.com/lingjivoo/OpenGraphAU) version of our code and models trained on a large-scale hybrid dataset of over 2,000k images and 41 action unit categories. 
 
 Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition
