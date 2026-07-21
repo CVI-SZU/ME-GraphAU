@@ -186,4 +186,4 @@ def set_logger(cfg):
         logger.addHandler(stream_handler)
 
     logging.info(print_conf(cfg))
-    logging.info('writting logs to file {}'.format(log_path))
+    logging.info('writing logs to file {}'.format(log_path))
